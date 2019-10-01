@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.*;
 
-public class TestSuteBase {
+public class TestSuiteBase {
     static final Logger log = LogManager.getRootLogger();
 
     @BeforeSuite
