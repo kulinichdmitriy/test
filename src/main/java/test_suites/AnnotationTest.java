@@ -1,10 +1,10 @@
-package core;
+package test_suites;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.*;
 
-public class TestAnnotation {
+public class AnnotationTest {
     static final Logger log = LogManager.getRootLogger();
   //  static final Logger userLog = LogManager.getLogger(TestAnnotation.class);
 
@@ -12,6 +12,9 @@ public class TestAnnotation {
     public void BeforeSuite() {
 	log.info("@BeforeSuite");
 
+    }   @AfterMethod
+    public void AfterMethod() {
+	log.info("@AfterMethod");
     }
 
     @BeforeTest
@@ -34,14 +37,7 @@ public class TestAnnotation {
 	log.info("@BeforeMethod");
     }
 
-    @Test
-    public void Test() {
-	log.info("@Test");
-    }
 
-    @AfterMethod
-    public void AfterMethod() {
-	log.info("@AfterMethod");
-    }
+
 
 }

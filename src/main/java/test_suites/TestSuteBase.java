@@ -1,4 +1,4 @@
-package core;
+package test_suites;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -47,15 +47,15 @@ public class TestSuteBase {
     public void AfterClass() {
 	log.info("@AfterClass");
     }
+
     @AfterTest
-    public void	AfterTest()
-    {
+    public void AfterTest() {
 	log.info("@AfterTest");
     }
+
     @AfterSuite
-    public void	AfterSuite()
-    {
-        log.info("@AfterSuite");
+    public void AfterSuite() {
+	log.info("@AfterSuite");
     }
 
 }
