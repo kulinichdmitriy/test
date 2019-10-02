@@ -2,7 +2,6 @@ package core;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import test_suites.AnnotationTest;
 
 public class test {
 
@@ -10,7 +9,7 @@ public class test {
     static final Logger userLogger = LogManager.getLogger(test.class);
 
     public static void main(String[] args) {
+        WebDriverHelper wd = new WebDriverHelper();
 
-	AnnotationTest at = new AnnotationTest(); }
+    }
 }
-

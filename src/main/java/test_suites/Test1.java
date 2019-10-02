@@ -3,6 +3,7 @@ package test_suites;
 import org.testng.annotations.Test;
 
 public class Test1 extends TestSuiteBase {
+
     @Test
     public void method1() {
 	log.info("Class Test1 method1");
