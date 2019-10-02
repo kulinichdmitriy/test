@@ -7,6 +7,7 @@ public class Test1 extends TestSuiteBase {
     @Test
     public void method1() {
 	log.info("Class Test1 method1");
+	openUrl("http://www.google.com");
     }
 
     @Test

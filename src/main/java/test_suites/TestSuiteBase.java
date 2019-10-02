@@ -6,7 +6,8 @@ import org.apache.logging.log4j.Logger;
 import org.testng.annotations.*;
 
 public class TestSuiteBase extends WebDriverHelper {
-    static final Logger log = LogManager.getRootLogger();
+    // static final Logger log = LogManager.getRootLogger();
+    static final Logger log = LogManager.getLogger(TestSuiteBase.class);
 
     @BeforeSuite
     public void beforeSuite() {
@@ -16,7 +17,7 @@ public class TestSuiteBase extends WebDriverHelper {
     @BeforeTest
     public void beforeTest() {
 	log.info("@BeforeTest");
-	initWebDriver();
+	init();
     }
 
     @BeforeClass
@@ -52,6 +53,7 @@ public class TestSuiteBase extends WebDriverHelper {
     @AfterTest
     public void afterTest() {
 	log.info("@AfterTest");
+	close();
     }
 
     @AfterSuite
