@@ -6,9 +6,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class WebDriverHelper {
     private WebDriver wd;
 
-    public void init() {
-	String pathToChromeDriver = "Z:\\eclipse_projects\\maven\\webdriver\\chromedriver.exe";
-	System.setProperty("webdriver.chrome.driver", pathToChromeDriver);
+    public WebDriverHelper() {
+	this.init();
+    }
+
+    private void init() {
+	String os = System.getProperty("os.name").toLowerCase().replace(" ", "");
+	String chromeDriver = os.contains("windows")
+			? "chromedriver.exe"
+			: "chromedriver_linux";
+	System.setProperty("webdriver.chrome.driver", "webdriver/" + chromeDriver);
 	wd = new ChromeDriver();
     }
 

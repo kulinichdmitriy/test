@@ -1,11 +1,11 @@
 package test_suites;
 
-import core.WebDriverHelper;
+import core.ApplicationManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.*;
 
-public class TestSuiteBase extends WebDriverHelper {
+public class TestSuiteBase extends ApplicationManager {
     // static final Logger log = LogManager.getRootLogger();
     static final Logger log = LogManager.getLogger(TestSuiteBase.class);
 
@@ -17,7 +17,6 @@ public class TestSuiteBase extends WebDriverHelper {
     @BeforeTest
     public void beforeTest() {
 	log.info("@BeforeTest");
-	init();
     }
 
     @BeforeClass
@@ -53,7 +52,7 @@ public class TestSuiteBase extends WebDriverHelper {
     @AfterTest
     public void afterTest() {
 	log.info("@AfterTest");
-	close();
+	wd().close();
     }
 
     @AfterSuite
