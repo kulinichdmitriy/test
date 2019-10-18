@@ -3,7 +3,7 @@ package test_suites;
 import org.testng.annotations.Test;
 
 public class Test2 extends TestSuiteBase {
-    @Test
+  /*  @Test
     public void method1() {
 	log.info("Class Test2 method1");
     }
@@ -16,5 +16,5 @@ public class Test2 extends TestSuiteBase {
     @Test
     public void method3() {
 	log.info("Class Test2 method3");
-    }
+    }*/
 }

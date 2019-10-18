@@ -7,16 +7,17 @@ import org.openqa.selenium.chrome.ChromeOptions;
 public class WebDriverHelper {
     private WebDriver wd;
 
-    private ChromeOptions options() {
-	ChromeOptions options = new ChromeOptions();
-	options.setHeadless(true);// это
-	options.addArguments("--headless");// и это ОДНО и ТО ЖЕ
-	ChromeDriver driver = new ChromeDriver(options);
-	return options;
-    }
-
     public WebDriverHelper() {
 	this.init();
+    }
+
+    private ChromeOptions getChromeOptions() {
+	ChromeOptions options = new ChromeOptions();
+	options.setHeadless(false);
+	options.addArguments("--user-agent=Mozilla/5.0 (Linux; Android 7.0; SM-G930V Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko)"
+			+ "Chrome/59.0.3071.125 Mobile "
+			+ "Safari/537.36");
+	return options;
     }
 
     private void init() {
@@ -25,7 +26,7 @@ public class WebDriverHelper {
 			? "chromedriver.exe"
 			: "chromedriver_linux";
 	System.setProperty("webdriver.chrome.driver", "webdriver/" + chromeDriver);
-	wd = new ChromeDriver(options());
+	wd = new ChromeDriver(this.getChromeOptions());
     }
 
     public void quit() {
