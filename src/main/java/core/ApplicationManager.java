@@ -23,4 +23,11 @@ public class ApplicationManager {
 	return webDriverHelper;
     }
 
+    public void getMyProperties(String prop) {
+
+	PropertiesHelper propertiesHelper = new PropertiesHelper();
+	propertiesHelper.getProperties(prop);
+
+    }
+
 }
