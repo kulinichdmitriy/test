@@ -1,13 +1,9 @@
 package test_suites;
 
 import core.ApplicationManager;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.testng.annotations.*;
 
 public class TestSuiteBase extends ApplicationManager {
-    // static final Logger log = LogManager.getRootLogger();
-    static final Logger log = LogManager.getLogger(TestSuiteBase.class);
 
     @BeforeSuite
     public void beforeSuite() {
@@ -52,7 +48,7 @@ public class TestSuiteBase extends ApplicationManager {
     @AfterTest
     public void afterTest() {
 	log.info("@AfterTest");
-	wd().close();
+	wd().quit();
     }
 
     @AfterSuite
