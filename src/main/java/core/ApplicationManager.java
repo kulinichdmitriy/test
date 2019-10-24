@@ -9,13 +9,7 @@ public class ApplicationManager {
     public Logger log = LogManager.getLogger(TestSuiteBase.class);
 
     private WebDriverHelper webDriverHelper;
-    private PropertiesHelper PropertiesHelper;
-
-    /**
-     * Get WebDriverHelper instance
-     *
-     * @return WebDriverHelper
-     */
+    private PropertiesHelper propertiesHelper;
 
     public WebDriverHelper wd() {
 	if (webDriverHelper == null) {
@@ -25,9 +19,9 @@ public class ApplicationManager {
     }
 
     public PropertiesHelper property() {
-	if (PropertiesHelper == null) {
-	    PropertiesHelper = new PropertiesHelper();
+	if (propertiesHelper == null) {
+	    propertiesHelper = new PropertiesHelper();
 	}
-	return PropertiesHelper;
-	}
+	return propertiesHelper;
+    }
 }
