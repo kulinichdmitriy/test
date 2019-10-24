@@ -17,12 +17,11 @@ public class PropertiesHelper {
 	    FileInputStream fis = new FileInputStream("src/main/resources/project.properties");
 	    property.load(fis);
 	} catch (IOException e) {
-	    log.error("No property file");
+	    log.error("No property file: "+e);
 	}
     }
 
     public String get(String prop) {
-	property.getProperty(prop);
 	String pr = property.getProperty(prop);
 	return pr;
     }
