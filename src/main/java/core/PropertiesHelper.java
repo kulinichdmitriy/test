@@ -8,17 +8,18 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class PropertiesHelper {
+
     private Logger log = LogManager.getLogger(PropertiesHelper.class);
     private Properties property;
 
     public PropertiesHelper() {
-	property = new Properties();
 	try {
 	    FileInputStream fis = new FileInputStream("src/main/resources/project.properties");
 	    property.load(fis);
 	} catch (IOException e) {
-	    log.error("No property file: "+e);
+	    log.error("No property file: " + e);
 	}
+	property = new Properties();
     }
 
     public String get(String prop) {
