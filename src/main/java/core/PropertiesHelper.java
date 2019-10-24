@@ -5,22 +5,24 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class PropertiesHelper {
+    private PropertiesHelper proper;
+
     FileInputStream fis;
-    Properties property = new Properties();
-    String prop;
 
-    public String getProperties(String properties) {
-
+    PropertiesHelper() {
 	try {
 	    fis = new FileInputStream("src/main/resources/project.properties");
-	    property.load(fis);
-	    prop = property.getProperty(properties);
-
-	    System.out.println(prop);
-
 	} catch (IOException e) {
 	    System.err.println("ОШИБКА: Файл свойств отсуствует!");
 	}
-	return prop;
+    }
+
+    public String get(String prop) throws IOException {
+	Properties property = new Properties();
+	String pr;
+	property.getProperty(prop);
+	property.load(fis);
+	pr = property.getProperty(prop);
+	return pr;
     }
 }
