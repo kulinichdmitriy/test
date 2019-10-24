@@ -17,7 +17,7 @@ public class PropertiesHelper {
 	try {
 	    fis = new FileInputStream("src/main/resources/project.properties");
 	} catch (IOException e) {
-	    log.info("ОШИБКА: Файл свойств отсуствует!");
+	    log.error("No property file");
 	}
     }
 
@@ -26,10 +26,9 @@ public class PropertiesHelper {
 	    property.getProperty(prop);
 	    property.load(fis);
 	} catch (IOException e) {
-	    log.info("ОШИБКА: Файл свойств отсуствует!");
+	    log.error("No property file");
 	}
 	String pr = property.getProperty(prop);
-	System.out.println(pr);
 	return pr;
     }
 }
