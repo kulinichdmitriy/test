@@ -9,25 +9,20 @@ import java.util.Properties;
 
 public class PropertiesHelper {
     private Logger log = LogManager.getLogger(PropertiesHelper.class);
-    private FileInputStream fis;
     private Properties property;
 
-    PropertiesHelper() {
+    public PropertiesHelper() {
 	property = new Properties();
 	try {
-	    fis = new FileInputStream("src/main/resources/project.properties");
+	    FileInputStream fis = new FileInputStream("src/main/resources/project.properties");
+	    property.load(fis);
 	} catch (IOException e) {
 	    log.error("No property file");
 	}
     }
 
     public String get(String prop) {
-	try {
-	    property.getProperty(prop);
-	    property.load(fis);
-	} catch (IOException e) {
-	    log.error("No property file");
-	}
+	property.getProperty(prop);
 	String pr = property.getProperty(prop);
 	return pr;
     }
