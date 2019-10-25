@@ -9,6 +9,7 @@ public class Test1 extends TestSuiteBase {
 	log.info("Class Test1 method1");
 	wd().openUrl("http://m.flirt.com");
 	property().get("phoenix.password");
+	property().get("");
     }
 
   /*  @Test

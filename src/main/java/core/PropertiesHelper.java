@@ -15,11 +15,12 @@ public class PropertiesHelper {
     public PropertiesHelper() {
 	try {
 	    FileInputStream fis = new FileInputStream("src/main/resources/project.properties");
+	    property = new Properties();
 	    property.load(fis);
 	} catch (IOException e) {
 	    log.error("No property file: " + e);
 	}
-	property = new Properties();
+
     }
 
     public String get(String prop) {
