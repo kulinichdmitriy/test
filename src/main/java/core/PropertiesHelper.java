@@ -20,7 +20,6 @@ public class PropertiesHelper {
 	} catch (IOException e) {
 	    log.error("No property file: " + e);
 	}
-
     }
 
     public String get(String prop) {

@@ -1,59 +1,61 @@
 package test_suites;
 
-import core.ApplicationManager;
 import org.testng.annotations.*;
 
-public class TestSuiteBase extends ApplicationManager {
+import static core.ApplicationManager.app;
+
+public class TestSuiteBase {
 
     @BeforeSuite
     public void beforeSuite() {
-	log.info("@BeforeSuite");
+	app().log.info("@BeforeSuite");
+	app().wd().openUrl("");
     }
 
     @BeforeTest
     public void beforeTest() {
-	log.info("@BeforeTest");
+	app().log.info("@BeforeTest");
     }
 
     @BeforeClass
     public void beforeClass() {
-	log.info("@BeforeClass");
+	app().log.info("@BeforeClass");
     }
 
     @BeforeGroups
     public void beforeGroups() {
-	log.info("@BeforeGroups");
+	app().log.info("@BeforeGroups");
     }
 
     @BeforeMethod
     public void beforeMethod() {
-	log.info("@BeforeMethod");
+	app().log.info("@BeforeMethod");
     }
 
     @AfterMethod
     public void afterMethod() {
-	log.info("@AfterMethod");
+	app().log.info("@AfterMethod");
     }
 
     @AfterGroups
     public void afterGroups() {
-	log.info("@AfterGroups");
+	app().log.info("@AfterGroups");
     }
 
     @AfterClass
     public void afterClass() {
-	log.info("@AfterClass");
+	app().log.info("@AfterClass");
     }
 
     @AfterTest
     public void afterTest() {
-	log.info("@AfterTest");
-	wd().quit();
+	app().log.info("@AfterTest");
+	app().wd().quit();
     }
 
     @AfterSuite
     public void afterSuite() {
-	log.info("@AfterSuite");
+	app().log.info("@AfterSuite");
     }
 
 }
