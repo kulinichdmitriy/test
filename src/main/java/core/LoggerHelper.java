@@ -6,7 +6,7 @@ import test_suites.TestSuiteBase;
 
 public class LoggerHelper {
 
-    public Logger log = LogManager.getLogger(TestSuiteBase.class);
+    public Logger log = LogManager.getLogger(getClassName(4));
 
     private String getClassName(int depth) {
 	return Thread.currentThread().getStackTrace()[depth].getClassName();
