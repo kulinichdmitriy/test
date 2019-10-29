@@ -8,15 +8,19 @@ public class LoggerHelper {
 
     public Logger log = LogManager.getLogger(TestSuiteBase.class);
 
-    public void info() {
-	log.info("Info: ");
+    private String getClassName(int depth) {
+	return Thread.currentThread().getStackTrace()[depth].getClassName();
     }
 
-    public void warning() {
-	log.warn("Warning: ");
+    public void info(String message) {
+	log.info(message);
     }
 
-    public void error() {
-	log.error("Error: ");
+    public void warning(String message) {
+	log.warn(message);
+    }
+
+    public void error(String message) {
+	log.error(message);
     }
 }

@@ -1,17 +1,20 @@
 package core;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import test_suites.TestSuiteBase;
-
 public class ApplicationManager {
 
     public static ApplicationManager applicationManager;
     private WebDriverHelper webDriverHelper;
     private PropertiesHelper propertiesHelper;
-    public Logger log = LogManager.getLogger(TestSuiteBase.class);
+    private LoggerHelper loggerHelper;
 
     private ApplicationManager() {
+    }
+
+    public LoggerHelper log() {
+	if (loggerHelper == null) {
+	    loggerHelper = new LoggerHelper();
+	}
+	return loggerHelper;
     }
 
     public static ApplicationManager app() {
