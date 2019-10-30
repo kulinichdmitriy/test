@@ -22,7 +22,7 @@ public class PropertiesHelper {
 	}
     }
 
-    public String get(String prop) {
+    public String getProperty(String prop) {
 	String pr = property.getProperty(prop);
 	return pr;
     }

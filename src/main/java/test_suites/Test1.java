@@ -9,10 +9,11 @@ public class Test1 extends TestSuiteBase {
     @Test
     public void method1() {
 	app().wd().openUrl("http://m.flirt.com");
-	app().property().get("phoenix.password");
+	app().property().getProperty("phoenix.password");
 	app().log().info("---------- TEST INFO----------");
 	app().log().warning("--------- TEST WARNING---------");
 	app().log().error("------------ TEST ERROR -----------");
+	app().property().getProperty("");
     }
 
   /*  @Test
