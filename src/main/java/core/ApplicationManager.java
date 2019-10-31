@@ -6,15 +6,9 @@ public class ApplicationManager {
     private WebDriverHelper webDriverHelper;
     private PropertiesHelper propertiesHelper;
     private LoggerHelper loggerHelper;
+    private DateTimeHelper dateTimeHelper;
 
     private ApplicationManager() {
-    }
-
-    public LoggerHelper log() {
-	if (loggerHelper == null) {
-	    loggerHelper = new LoggerHelper();
-	}
-	return loggerHelper;
     }
 
     public static ApplicationManager app() {
@@ -22,6 +16,13 @@ public class ApplicationManager {
 	    applicationManager = new ApplicationManager();
 	}
 	return applicationManager;
+    }
+
+    public LoggerHelper log() {
+	if (loggerHelper == null) {
+	    loggerHelper = new LoggerHelper();
+	}
+	return loggerHelper;
     }
 
     public WebDriverHelper wd() {
@@ -36,5 +37,12 @@ public class ApplicationManager {
 	    propertiesHelper = new PropertiesHelper();
 	}
 	return propertiesHelper;
+    }
+
+    public DateTimeHelper dateTime() {
+	if (dateTimeHelper == null) {
+	    dateTimeHelper = new DateTimeHelper();
+	}
+	return dateTimeHelper;
     }
 }
