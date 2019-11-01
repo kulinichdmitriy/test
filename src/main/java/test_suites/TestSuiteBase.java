@@ -63,9 +63,7 @@ public class TestSuiteBase {
     private void setProperties() {
 	String suiteDate = app().dateTime().getCurrentDateTime(DateTimeHelper.EUROPE_KIEV, DateTimeHelper.DATE_FORMAT);
 	String suiteTime = app().dateTime().getCurrentDateTime(DateTimeHelper.EUROPE_KIEV, DateTimeHelper.TIME_FORMAT);
-	String reportPath = "reports/"
-			+ suiteDate + "/"
-			+ suiteTime + "/";
+	String reportPath = "reports/" + suiteDate + "/" + suiteTime + "/";
 	System.setProperty("suiteDate", suiteDate);
 	System.setProperty("suiteTime", suiteTime);
 	System.setProperty("reportPath", reportPath);

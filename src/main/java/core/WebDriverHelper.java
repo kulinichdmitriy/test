@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import static core.ApplicationManager.app;
+
 public class WebDriverHelper {
     private WebDriver wd;
 
@@ -15,12 +17,13 @@ public class WebDriverHelper {
 	ChromeOptions options = new ChromeOptions();
 	options.setHeadless(true);
 	//options.addArguments("--user-agent=Mozilla/5.0 (Linux; Android 7.0; SM-G930V Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko)"
-			//+ "Chrome/59.0.3071.125 Mobile "
-			//+ "Safari/537.36");
+	//+ "Chrome/59.0.3071.125 Mobile "
+	//+ "Safari/537.36");
 	return options;
     }
 
     private void init() {
+	app().log().info("Init Chrome Driver ");
 	String os = System.getProperty("os.name").toLowerCase().replace(" ", "");
 	String chromeDriver = os.contains("windows")
 			? "chromedriver.exe"
@@ -30,11 +33,13 @@ public class WebDriverHelper {
     }
 
     public void quit() {
+	app().log().info("Close Chrome Driver ");
 	wd.close();
 	wd.quit();
     }
 
     public void openUrl(String url) {
+	app().log().info("Open URL: " + url);
 	wd.navigate().to(url);
     }
 
