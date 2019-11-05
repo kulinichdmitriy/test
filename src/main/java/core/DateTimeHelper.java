@@ -21,7 +21,6 @@ public class DateTimeHelper {
      */
     public String getCurrentDateTime(String zoneId, String format) {
 
-	app().log().info("ZoneID - " + zoneId + ". Format - " + format);
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
 	LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of(zoneId));
 	return localDateTime.format(formatter);
