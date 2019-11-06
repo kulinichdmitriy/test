@@ -10,10 +10,10 @@ public class PropertiesHelper {
 
     private Properties property;
 
-    public PropertiesHelper() {
+    public PropertiesHelper(String path) {
 	try {
-	    app().log().info("Open Properies file");
-	    FileInputStream fis = new FileInputStream("src/main/resources/project.properties");
+	    app().log().info("Open Properies file - " + path);
+	    FileInputStream fis = new FileInputStream("src/main/resources/"+path);
 	    property = new Properties();
 	    property.load(fis);
 	} catch (IOException e) {
