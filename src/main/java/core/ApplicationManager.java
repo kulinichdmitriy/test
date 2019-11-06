@@ -32,7 +32,7 @@ public class ApplicationManager {
 	return webDriverHelper;
     }
 
-    public PropertiesHelper property(String filename) {
+    public PropertiesHelper property() {
 	if (propertiesHelper == null) {
 	    propertiesHelper = new PropertiesHelper("project.properties");
 	}

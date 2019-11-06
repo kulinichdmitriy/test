@@ -24,6 +24,7 @@ public class WebDriverHelper {
 
     private void init() {
 	app().log().info("Init Chrome Driver ");
+
 	String os = System.getProperty("os.name").toLowerCase().replace(" ", "");
 	String chromeDriver = os.contains("windows")
 			? "chromedriver.exe"
@@ -34,12 +35,14 @@ public class WebDriverHelper {
 
     public void quit() {
 	app().log().info("Close Chrome Driver ");
+
 	wd.close();
 	wd.quit();
     }
 
     public void openUrl(String url) {
 	app().log().info("Open URL: " + url);
+
 	wd.navigate().to(url);
     }
 
