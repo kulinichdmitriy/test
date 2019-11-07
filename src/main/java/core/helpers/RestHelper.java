@@ -23,15 +23,4 @@ public class RestHelper {
     public RequestSpecification request() {
 	return given().spec(baseSpecification);
     }
-
-    public void openSite(String url) {
-	Object object = request()
-			.when()
-			.get(url)
-			.then()
-			.statusCode(200)
-			.extract()
-			.response()
-			.asString();
-    }
 }

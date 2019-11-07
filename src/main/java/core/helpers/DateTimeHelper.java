@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
-import static core.ApplicationManager.app;
-
 public class DateTimeHelper {
 
     public static final String DATE_FORMAT = "yyyy-MM-dd";
@@ -20,8 +18,6 @@ public class DateTimeHelper {
      * @return String DateTime
      */
     public String getCurrentDateTime(String zoneId, String format) {
-	//app().log().info("Get current date time using format [ " + format + " ] and zoneId [ " + zoneId + " ]");
-
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
 	LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of(zoneId));
 	return localDateTime.format(formatter);

@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import static core.ApplicationManager.app;
 
-public class Test1 extends TestSuiteBase {
+public class RegistrationTest extends TestSuiteBase {
 
     @Test
     public void method1() {
@@ -14,17 +14,17 @@ public class Test1 extends TestSuiteBase {
 	app().log().warning("--------- TEST WARNING---------");
 	app().log().error("------------ TEST ERROR -----------");
 	app().property().getProperty("");
-	app().rest().openSite("https://www.flirt.com");
-
+	openSite("http://www.flirt.com");
     }
 
-  /*  @Test
-    public void method2() {
-	log.info("Class Test1 method2");
+    public void openSite(String url) {
+	Object object = app().rest().request()
+			.when()
+			.get(url)
+			.then()
+			.statusCode(200)
+			.extract()
+			.response()
+			.asString();
     }
-
-    @Test
-    public void method3() {
-	log.info("Class Test1 method3");
-    }*/
 }

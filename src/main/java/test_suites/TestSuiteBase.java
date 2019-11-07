@@ -10,8 +10,6 @@ public class TestSuiteBase {
     @BeforeSuite
     public void beforeSuite() {
 	this.setProperties();
-	/*app().log().info("@BeforeSuite");
-	app().wd().openUrl("https://www.google.com");*/
     }
 
     @BeforeTest
