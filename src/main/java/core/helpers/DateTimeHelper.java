@@ -1,4 +1,4 @@
-package core;
+package core.helpers;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -20,8 +20,7 @@ public class DateTimeHelper {
      * @return String DateTime
      */
     public String getCurrentDateTime(String zoneId, String format) {
-
-	app().log().info("DateTimeFormatter - " + format + " LocalDateTime - " + zoneId);
+	//app().log().info("Get current date time using format [ " + format + " ] and zoneId [ " + zoneId + " ]");
 
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
 	LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of(zoneId));

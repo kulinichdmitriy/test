@@ -1,5 +1,7 @@
 package core;
 
+import core.helpers.*;
+
 public class ApplicationManager {
 
     public static ApplicationManager applicationManager;
@@ -7,8 +9,16 @@ public class ApplicationManager {
     private PropertiesHelper propertiesHelper;
     private LoggerHelper loggerHelper;
     private DateTimeHelper dateTimeHelper;
+    private RestHelper restHelper;
 
     private ApplicationManager() {
+    }
+
+    public  RestHelper rest() {
+	if (restHelper == null) {
+	    restHelper = new RestHelper();
+	}
+	return restHelper;
     }
 
     public static ApplicationManager app() {

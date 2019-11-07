@@ -8,12 +8,14 @@ public class Test1 extends TestSuiteBase {
 
     @Test
     public void method1() {
-	app().wd().openUrl("http://m.flirt.com");
+	app().wd().openUrl("http://www.flirt.com");
 	app().property().getProperty("phoenix.password");
 	app().log().info("---------- TEST INFO----------");
 	app().log().warning("--------- TEST WARNING---------");
 	app().log().error("------------ TEST ERROR -----------");
 	app().property().getProperty("");
+	app().rest().openSite("https://www.flirt.com");
+
     }
 
   /*  @Test

@@ -1,4 +1,4 @@
-package core;
+package core.helpers;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -41,7 +41,7 @@ public class WebDriverHelper {
     }
 
     public void openUrl(String url) {
-	app().log().info("Open URL: " + url);
+	app().log().info("Open URL: " + "[ " + url + " ]");
 
 	wd.navigate().to(url);
     }

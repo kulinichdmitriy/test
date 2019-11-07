@@ -1,6 +1,6 @@
 package test_suites;
 
-import core.DateTimeHelper;
+import core.helpers.DateTimeHelper;
 import org.testng.annotations.*;
 
 import static core.ApplicationManager.app;
@@ -10,8 +10,8 @@ public class TestSuiteBase {
     @BeforeSuite
     public void beforeSuite() {
 	this.setProperties();
-	app().log().info("@BeforeSuite");
-	app().wd().openUrl("https://www.google.com");
+	/*app().log().info("@BeforeSuite");
+	app().wd().openUrl("https://www.google.com");*/
     }
 
     @BeforeTest
