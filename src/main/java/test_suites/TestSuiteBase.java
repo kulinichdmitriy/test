@@ -50,7 +50,6 @@ public class TestSuiteBase {
     @AfterTest
     public void afterTest() {
 	app().log().info("@AfterTest");
-	app().wd().quit();
     }
 
     @AfterSuite

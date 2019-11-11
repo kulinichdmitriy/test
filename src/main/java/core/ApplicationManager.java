@@ -14,13 +14,6 @@ public class ApplicationManager {
     private ApplicationManager() {
     }
 
-    public  RestHelper rest() {
-	if (restHelper == null) {
-	    restHelper = new RestHelper();
-	}
-	return restHelper;
-    }
-
     public static ApplicationManager app() {
 	if (applicationManager == null) {
 	    applicationManager = new ApplicationManager();
@@ -54,5 +47,12 @@ public class ApplicationManager {
 	    dateTimeHelper = new DateTimeHelper();
 	}
 	return dateTimeHelper;
+    }
+
+    public RestHelper rest() {
+	if (restHelper == null) {
+	    restHelper = new RestHelper();
+	}
+	return restHelper;
     }
 }
