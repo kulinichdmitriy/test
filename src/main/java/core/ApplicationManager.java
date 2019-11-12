@@ -23,7 +23,7 @@ public class ApplicationManager {
 	return applicationManager;
     }
 
-    public UserModel userMod() {
+    public UserModel userModel() {
 	if (userModel == null) {
 	    userModel = new UserModel();
 	}
