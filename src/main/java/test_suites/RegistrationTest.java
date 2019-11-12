@@ -42,8 +42,7 @@ public class RegistrationTest extends TestSuiteBase {
 			.post("https://www.flirt.com/user/register")
 			.then()
 			.statusCode(302)
-			.header("location", Matchers
-					.equalTo("https://www.flirt.com/confirmation"));
+			.header("location", Matchers.equalTo("https://www.flirt.com/confirmation"));
 
     }
 }
