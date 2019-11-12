@@ -38,27 +38,27 @@ public class UserModel {
 	return this;
     }
 
-    public UserModel setPassword(String asdasd123) {
+    public UserModel setPassword(String password) {
 	this.password = password;
 	return this;
     }
 
-    public UserModel setGenger(String male) {
+    public UserModel setGenger(String gender) {
 	this.gender = gender;
 	return this;
     }
 
-    public UserModel setSexualOrientation(String hetero) {
+    public UserModel setSexualOrientation(String sexualOrientation) {
 	this.sexualOrientation = sexualOrientation;
 	return this;
     }
 
-    public UserModel setEmail(String s) {
+    public UserModel setEmail(String email) {
 	this.email = email;
 	return this;
     }
 
-    public UserModel setLocation(String s) {
+    public UserModel setLocation(String location) {
 	this.location = location;
 	return this;
     }

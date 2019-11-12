@@ -26,6 +26,7 @@ public class RegistrationTest extends TestSuiteBase {
 	String lid = "3830403ea31a11e9a8911402ec33333c";
 	String landingVisitId = "4361e4417c576200f02c81c7ecc54eab";
 	String transferId = "b106b41c55f449ae84e2d050b981bed9";
+	System.out.println("email - "+app().userMod().getEmail());
 
 	ValidatableResponse response = app().rest()
 			.request()
