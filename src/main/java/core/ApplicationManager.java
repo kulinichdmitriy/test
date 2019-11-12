@@ -1,5 +1,6 @@
 package core;
 
+import core.data_models.UserModel;
 import core.helpers.*;
 
 public class ApplicationManager {
@@ -10,6 +11,7 @@ public class ApplicationManager {
     private LoggerHelper loggerHelper;
     private DateTimeHelper dateTimeHelper;
     private RestHelper restHelper;
+    private UserModel userModel;
 
     private ApplicationManager() {
     }
@@ -19,6 +21,13 @@ public class ApplicationManager {
 	    applicationManager = new ApplicationManager();
 	}
 	return applicationManager;
+    }
+
+    public UserModel userMod() {
+	if (userModel == null) {
+	    userModel = new UserModel();
+	}
+	return userModel;
     }
 
     public LoggerHelper log() {

@@ -6,7 +6,7 @@ public class UserModel {
     private String password;
     private String gender;
     private String sexualOrientation;
-    private int age = 21;
+    private int age;
     private String location;
 
     public String getEmail() {
@@ -38,27 +38,27 @@ public class UserModel {
 	return this;
     }
 
-    public UserModel setPassword() {
+    public UserModel setPassword(String asdasd123) {
 	this.password = password;
 	return this;
     }
 
-    public UserModel setGenger() {
+    public UserModel setGenger(String male) {
 	this.gender = gender;
 	return this;
     }
 
-    public UserModel setSexualOrientation() {
+    public UserModel setSexualOrientation(String hetero) {
 	this.sexualOrientation = sexualOrientation;
 	return this;
     }
 
-    public UserModel setEmail() {
+    public UserModel setEmail(String s) {
 	this.email = email;
 	return this;
     }
 
-    public UserModel setLocation() {
+    public UserModel setLocation(String s) {
 	this.location = location;
 	return this;
     }
