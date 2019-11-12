@@ -25,10 +25,10 @@ public class RegistrationTest extends TestSuiteBase {
 	ValidatableResponse response = app().rest()
 			.request()
 			.body("UserForm[gender]=" + gender + "&UserForm[sexual_orientation]=" + sexualOrientation + "&UserForm[age]=" + age + "&UserForm[location]=" + location
-					+ "&UserForm[email]=" +
-					email + "&UserForm[password]=" + password + "&UserForm[termsConsent]=" + termsConsent + "&UserForm[policyConsent]=" + policyConsent
-					+ "&UserForm[lid"
-					+ "]=3830403ea31a11e9a8911402ec33333c&UserForm[landingVisitId]=4361e4417c576200f02c81c7ecc54eab&UserForm[splitId]=&UserForm[transferId]=b106b41c55f449ae84e2d050b981bed9")
+					+ "&UserForm[email]=" + email + "&UserForm[password]=" + password + "&UserForm[termsConsent]=" + termsConsent
+					+ "&UserForm[policyConsent]=" + policyConsent
+					+ "&UserForm[lid]=3830403ea31a11e9a8911402ec33333c&UserForm[landingVisitId]=4361e4417c576200f02c81c7ecc54eab&UserForm[splitId"
+					+ "]=&UserForm[transferId]=b106b41c55f449ae84e2d050b981bed9")
 			.when()
 			.post("https://www.flirt.com/user/register")
 			.then()
