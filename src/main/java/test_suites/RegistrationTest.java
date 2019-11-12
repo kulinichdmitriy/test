@@ -17,18 +17,27 @@ public class RegistrationTest extends TestSuiteBase {
 	String password = "asdasd123";
 	String gender = "male";
 	String sexualOrientation = "hetero";
-	String age = "21";
+	int age = 21;
 	String location = "Dnipropetrovsk,+49000";
-	String termsConsent = "true";
-	String policyConsent = "true";
+	Boolean termsConsent = true;
+	Boolean policyConsent = true;
+	String lid = "3830403ea31a11e9a8911402ec33333c";
+	String landingVisitId = "4361e4417c576200f02c81c7ecc54eab";
+	String transferId = "b106b41c55f449ae84e2d050b981bed9";
 
 	ValidatableResponse response = app().rest()
 			.request()
-			.body("UserForm[gender]=" + gender + "&UserForm[sexual_orientation]=" + sexualOrientation + "&UserForm[age]=" + age + "&UserForm[location]=" + location
-					+ "&UserForm[email]=" + email + "&UserForm[password]=" + password + "&UserForm[termsConsent]=" + termsConsent
+			.body("UserForm[gender]=" + gender
+					+ "&UserForm[sexual_orientation]=" + sexualOrientation
+					+ "&UserForm[age]=" + age
+					+ "&UserForm[location]=" + location
+					+ "&UserForm[email]=" + email
+					+ "&UserForm[password]=" + password
+					+ "&UserForm[termsConsent]=" + termsConsent
 					+ "&UserForm[policyConsent]=" + policyConsent
-					+ "&UserForm[lid]=3830403ea31a11e9a8911402ec33333c&UserForm[landingVisitId]=4361e4417c576200f02c81c7ecc54eab&UserForm[splitId"
-					+ "]=&UserForm[transferId]=b106b41c55f449ae84e2d050b981bed9")
+					+ "&UserForm[lid]=" + lid
+					+ "&UserForm[landingVisitId]=" + landingVisitId
+					+ "&UserForm[transferId]=" + transferId)
 			.when()
 			.post("https://www.flirt.com/user/register")
 			.then()
