@@ -45,6 +45,5 @@ public class RegistrationTest extends TestSuiteBase {
 			.response()
 			.jsonPath()
 			.get("data.refresh_token");
-
     }
 }
