@@ -69,6 +69,6 @@ public class RegistrationTest extends TestSuiteBase {
 			.extract()
 			.response();
 
-	//System.out.println(userConfirmation.extract().response().asString());
+	System.out.println(userConfirmation.asString());
     }
 }
