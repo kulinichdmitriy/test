@@ -8,6 +8,7 @@ public class UserModel {
     private String sexualOrientation;
     private int age;
     private String location;
+    private String autologinKey;
 
     public String getEmail() {
 	return email;
@@ -31,6 +32,10 @@ public class UserModel {
 
     public String getLocation() {
 	return location;
+    }
+
+    public String getAutologinKey() {
+	return autologinKey;
     }
 
     public UserModel setAge(int age) {
@@ -60,6 +65,11 @@ public class UserModel {
 
     public UserModel setLocation(String location) {
 	this.location = location;
+	return this;
+    }
+
+    public UserModel setAutologinKey(String autologinKey) {
+	this.autologinKey = autologinKey;
 	return this;
     }
 }
