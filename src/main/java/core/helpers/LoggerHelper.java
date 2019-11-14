@@ -2,6 +2,9 @@ package core.helpers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.io.IoBuilder;
+
+import java.io.PrintStream;
 
 public class LoggerHelper {
 
@@ -23,5 +26,12 @@ public class LoggerHelper {
 
     public void error(String message) {
 	this.log().error(message);
+    }
+    /**
+     * Get log stream
+     * @return
+     */
+    public static PrintStream getLogStream() {
+	return IoBuilder.forLogger(RestHelper.class).buildPrintStream();
     }
 }

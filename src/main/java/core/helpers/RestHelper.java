@@ -2,6 +2,10 @@ package core.helpers;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.cookie.CookieFilter;
+import io.restassured.filter.log.ErrorLoggingFilter;
+import io.restassured.filter.log.LogDetail;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
@@ -13,7 +17,10 @@ public class RestHelper {
     public RestHelper() {
 	baseSpecification = new RequestSpecBuilder()
 			.addFilter(new CookieFilter())
-			.setContentType(ContentType.URLENC)
+			.addFilter(ResponseLoggingFilter.logResponseTo(LoggerHelper.getLogStream(), LogDetail.STATUS))
+			.addFilter(RequestLoggingFilter.logRequestTo(LoggerHelper.getLogStream()))
+			.addFilter(ErrorLoggingFilter.logErrorsTo(LoggerHelper.getLogStream()))
+			.setContentType(ContentType.URLENC.withCharset("UTF-8"))
 			.setAccept(ContentType.ANY)
 			.setRelaxedHTTPSValidation()
 			.setUrlEncodingEnabled(true)

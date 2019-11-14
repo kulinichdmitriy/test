@@ -10,8 +10,8 @@ import static core.ApplicationManager.app;
 
 public class RegistrationTest extends TestSuiteBase {
 
-    @Test
-    public void RegistrationUser() {
+    @Test(priority = 1)
+    public void registration() {
 	app().userModel().setAge(21);
 	app().userModel().setEmail("dmitriykulinich" + (new Date()).getTime() + "@maildrop.ropot.net");
 	app().userModel().setGenger("male");
@@ -23,10 +23,8 @@ public class RegistrationTest extends TestSuiteBase {
 	String lid = "3830403ea31a11e9a8911402ec33333c";
 	String landingVisitId = "4361e4417c576200f02c81c7ecc54eab";
 	String transferId = "b106b41c55f449ae84e2d050b981bed9";
-	System.out.println("email - " + app().userModel().getEmail());
 
-	Response registrationUser = app().rest()
-			.request()
+	Response response = app().rest().request()
 			.header("X-Requested-With", "XMLHttpRequest")
 			.body("UserForm[gender]=" + app().userModel().getGender()
 					+ "&UserForm[sexual_orientation]=" + app().userModel().getSexualOrientation()
@@ -46,29 +44,35 @@ public class RegistrationTest extends TestSuiteBase {
 			.extract()
 			.response();
 
-	String refreshToken = registrationUser.jsonPath().get("data.refresh_token");
-	String status = registrationUser.jsonPath().get("status");
+	String refreshToken = response.jsonPath().get("data.refresh_token");
+	String status = response.jsonPath().get("status");
 
 	if (!status.equals("success")) {
-	    throw new TestException("Registration failed, " + registrationUser.jsonPath().get("$"));
-	} else {
+	    throw new TestException("Registration failed, " + response.jsonPath().get("$"));
 	}
 	app().userModel().setAutologinKey(refreshToken);
     }
 
-    @Test
+    @Test(priority = 2)
     public void confirmation() {
-	RegistrationUser();
-
-	Response userConfirmation = app().rest()
-			.request()
+	// Make autologin
+	app().rest().request()
 			.when()
 			.get("https://www.flirt.com/site/autologin/key/" + app().userModel().getAutologinKey())
+			.then()
+			.statusCode(200);
+
+	// Get csrfToken
+	Response response = app().rest()
+			.request()
+			.header("X-Requested-With", "XMLHttpRequest")
+			.when()
+			.get("https://www.flirt.com/api/v1/appData")
 			.then()
 			.statusCode(200)
 			.extract()
 			.response();
 
-	System.out.println(userConfirmation.asString());
+	// response - получить отсюда csrfToken
     }
 }
