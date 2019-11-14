@@ -1,6 +1,7 @@
 package test_suites;
 
-import io.restassured.response.ValidatableResponse;
+import io.restassured.response.Response;
+import org.testng.TestException;
 import org.testng.annotations.Test;
 
 import java.util.Date;
@@ -10,7 +11,7 @@ import static core.ApplicationManager.app;
 public class RegistrationTest extends TestSuiteBase {
 
     @Test
-    public void getUserAutologinToken() {
+    public void RegistrationUser() {
 	app().userModel().setAge(21);
 	app().userModel().setEmail("dmitriykulinich" + (new Date()).getTime() + "@maildrop.ropot.net");
 	app().userModel().setGenger("male");
@@ -24,8 +25,9 @@ public class RegistrationTest extends TestSuiteBase {
 	String transferId = "b106b41c55f449ae84e2d050b981bed9";
 	System.out.println("email - " + app().userModel().getEmail());
 	String refreshToken = "data.refresh_token";
+	String status = "status";
 
-	String getRefreshToken = app().rest()
+	Response getRefreshToken = app().rest()
 			.request()
 			.header("X-Requested-With", "XMLHttpRequest")
 			.body("UserForm[gender]=" + app().userModel().getGender()
@@ -44,16 +46,21 @@ public class RegistrationTest extends TestSuiteBase {
 			.then()
 			.statusCode(200)
 			.extract()
-			.response()
-			.jsonPath()
-			.get(refreshToken);
-	app().userModel().setAutologinKey(getRefreshToken);
+			.response();
+
+	if (getRefreshToken.jsonPath().get(status).equals("success")) {
+	    System.out.println("Json status [ " + getRefreshToken.jsonPath().get(status).toString() + " ]");
+	} else
+	    throw new TestException("Registration failed, " + getRefreshToken.jsonPath().get("$"));
+
+	app().userModel().setAutologinKey(getRefreshToken.jsonPath().get(refreshToken).toString());
+	app().log().info("token - "+getRefreshToken.jsonPath().get(refreshToken).toString());
 
     }
 
     @Test
     public void confirmation() {
-	getUserAutologinToken();
+	/*RegistrationUser();
 
 	ValidatableResponse userConfirmation = app().rest()
 			.request()
@@ -61,5 +68,7 @@ public class RegistrationTest extends TestSuiteBase {
 			.get("https://www.flirt.com/site/autologin/key/" + app().userModel().getAutologinKey())
 			.then()
 			.statusCode(200);
+
+	System.out.println(userConfirmation.extract().response().asString());*/
     }
 }

@@ -14,33 +14,13 @@ public class UserModel {
 	return email;
     }
 
+    public UserModel setEmail(String email) {
+	this.email = email;
+	return this;
+    }
+
     public String getPassword() {
 	return password;
-    }
-
-    public String getGender() {
-	return gender;
-    }
-
-    public String getSexualOrientation() {
-	return sexualOrientation;
-    }
-
-    public int getAge() {
-	return age;
-    }
-
-    public String getLocation() {
-	return location;
-    }
-
-    public String getAutologinKey() {
-	return autologinKey;
-    }
-
-    public UserModel setAge(int age) {
-	this.age = age;
-	return this;
     }
 
     public UserModel setPassword(String password) {
@@ -48,9 +28,17 @@ public class UserModel {
 	return this;
     }
 
+    public String getGender() {
+	return gender;
+    }
+
     public UserModel setGenger(String gender) {
 	this.gender = gender;
 	return this;
+    }
+
+    public String getSexualOrientation() {
+	return sexualOrientation;
     }
 
     public UserModel setSexualOrientation(String sexualOrientation) {
@@ -58,14 +46,26 @@ public class UserModel {
 	return this;
     }
 
-    public UserModel setEmail(String email) {
-	this.email = email;
+    public int getAge() {
+	return age;
+    }
+
+    public UserModel setAge(int age) {
+	this.age = age;
 	return this;
+    }
+
+    public String getLocation() {
+	return location;
     }
 
     public UserModel setLocation(String location) {
 	this.location = location;
 	return this;
+    }
+
+    public String getAutologinKey() {
+	return autologinKey;
     }
 
     public UserModel setAutologinKey(String autologinKey) {
