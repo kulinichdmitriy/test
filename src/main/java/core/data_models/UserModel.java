@@ -9,6 +9,7 @@ public class UserModel {
     private int age;
     private String location;
     private String autologinKey;
+    private String csrfToken;
 
     public String getEmail() {
 	return email;
@@ -70,6 +71,15 @@ public class UserModel {
 
     public UserModel setAutologinKey(String autologinKey) {
 	this.autologinKey = autologinKey;
+	return this;
+    }
+
+    public String setcsrfToken(String csrfToken) {
+	return csrfToken;
+    }
+
+    public UserModel getcsrfToken(String csrfToken) {
+	this.csrfToken = csrfToken;
 	return this;
     }
 }

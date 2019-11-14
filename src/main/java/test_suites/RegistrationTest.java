@@ -53,7 +53,7 @@ public class RegistrationTest extends TestSuiteBase {
 	app().userModel().setAutologinKey(refreshToken);
     }
 
-    @Test(priority = 2)
+    @Test(priority = 1, dependsOnMethods = "registration")
     public void confirmation() {
 	// Make autologin
 	app().rest().request()
@@ -73,6 +73,6 @@ public class RegistrationTest extends TestSuiteBase {
 			.extract()
 			.response();
 
-	// response - получить отсюда csrfToken
+	app().userModel().setcsrfToken(response.jsonPath().get("data.csrfToken.value"));
     }
 }
