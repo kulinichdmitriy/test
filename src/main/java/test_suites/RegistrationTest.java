@@ -24,10 +24,8 @@ public class RegistrationTest extends TestSuiteBase {
 	String landingVisitId = "4361e4417c576200f02c81c7ecc54eab";
 	String transferId = "b106b41c55f449ae84e2d050b981bed9";
 	System.out.println("email - " + app().userModel().getEmail());
-	String refreshToken = "data.refresh_token";
-	String status = "status";
 
-	Response getRefreshToken = app().rest()
+	Response registrationUser = app().rest()
 			.request()
 			.header("X-Requested-With", "XMLHttpRequest")
 			.body("UserForm[gender]=" + app().userModel().getGender()
@@ -48,27 +46,29 @@ public class RegistrationTest extends TestSuiteBase {
 			.extract()
 			.response();
 
-	if (getRefreshToken.jsonPath().get(status).equals("success")) {
-	    System.out.println("Json status [ " + getRefreshToken.jsonPath().get(status).toString() + " ]");
-	} else
-	    throw new TestException("Registration failed, " + getRefreshToken.jsonPath().get("$"));
+	String refreshToken = registrationUser.jsonPath().get("data.refresh_token");
+	String status = registrationUser.jsonPath().get("status");
 
-	app().userModel().setAutologinKey(getRefreshToken.jsonPath().get(refreshToken).toString());
-	app().log().info("token - "+getRefreshToken.jsonPath().get(refreshToken).toString());
-
+	if (!status.equals("success")) {
+	    throw new TestException("Registration failed, " + registrationUser.jsonPath().get("$"));
+	} else {
+	}
+	app().userModel().setAutologinKey(refreshToken);
     }
 
     @Test
     public void confirmation() {
-	/*RegistrationUser();
+	RegistrationUser();
 
-	ValidatableResponse userConfirmation = app().rest()
+	Response userConfirmation = app().rest()
 			.request()
 			.when()
 			.get("https://www.flirt.com/site/autologin/key/" + app().userModel().getAutologinKey())
 			.then()
-			.statusCode(200);
+			.statusCode(200)
+			.extract()
+			.response();
 
-	System.out.println(userConfirmation.extract().response().asString());*/
+	//System.out.println(userConfirmation.extract().response().asString());
     }
 }
