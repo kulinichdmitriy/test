@@ -3,18 +3,17 @@ package test_suites;
 import core.data_providers.RegistrationDataProvider;
 import io.restassured.response.Response;
 import org.testng.TestException;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import java.util.Date;
-
 import static core.ApplicationManager.app;
 
 public class RegistrationTest extends TestSuiteBase {
 
-   // RegistrationDataProvider registrationDataProvider = new RegistrationDataProvider();
+    RegistrationDataProvider dp = new RegistrationDataProvider();
 
-    @Test(dataProvider = "registrationDataProvider", priority = 1)
-    public void registration( String email, String password, String gender, String sexualOrientation, int age, String location, String autologinKey, String csfrToken) {
+    @Test(dataProvider = "RegDataProvider", dataProviderClass = RegistrationDataProvider.class, priority = 1)
+    public void registration(String gender ) {
 	app().userModel().setAge(21);
 	app().userModel().setEmail("dmitriykulinich" + (new Date()).getTime() + "@maildrop.ropot.net");
 	app().userModel().setGenger("male");
@@ -29,7 +28,7 @@ public class RegistrationTest extends TestSuiteBase {
 
 	Response response = app().rest().request()
 			.header("X-Requested-With", "XMLHttpRequest")
-			.body("UserForm[gender]=" + app().userModel().getGender()
+			.body("UserForm[gender]=" + gender//app().userModel().getGender()
 					+ "&UserForm[sexual_orientation]=" + app().userModel().getSexualOrientation()
 					+ "&UserForm[age]=" + app().userModel().getAge()
 					+ "&UserForm[location]=" + app().userModel().getLocation()
@@ -56,7 +55,7 @@ public class RegistrationTest extends TestSuiteBase {
 	app().userModel().setAutologinKey(refreshToken);
     }
 
-    @Test//(priority = 2, dependsOnMethods = "registration")
+    @Test(priority = 2, dependsOnMethods = "registration")
     public void confirmation() {
 	// Make autologin
 	app().rest().request()
@@ -80,4 +79,5 @@ public class RegistrationTest extends TestSuiteBase {
 	app().log().info(response.jsonPath().get("data.csrfToken.value").toString());
 
     }
+
 }

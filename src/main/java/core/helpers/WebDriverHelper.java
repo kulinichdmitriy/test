@@ -15,7 +15,7 @@ public class WebDriverHelper {
 
     private ChromeOptions getChromeOptions() {
 	ChromeOptions options = new ChromeOptions();
-	options.setHeadless(false);
+	options.setHeadless(true);
 	//options.addArguments("--user-agent=Mozilla/5.0 (Linux; Android 7.0; SM-G930V Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko)"
 	//+ "Chrome/59.0.3071.125 Mobile "
 	//+ "Safari/537.36");
@@ -45,4 +45,11 @@ public class WebDriverHelper {
 
 	wd.navigate().to(url);
     }
+
+    public void clearCookie()
+
+    {
+        wd.manage().deleteAllCookies();
+    }
+
 }
