@@ -4,8 +4,8 @@ import org.testng.annotations.DataProvider;
 
 public class RegistrationDataProvider {
 
-    @DataProvider(name = "RegDataProvider")
-    public static Object[][] RegDataProvider() {
+    @DataProvider(name = "regDataProvider")
+    public static Object[][] regDataProvider() {
 	return new Object[][] {{ "male" },{ "female" }};
     }
 }

@@ -1,8 +1,11 @@
 package core.helpers;
 
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+import java.util.Set;
 
 import static core.ApplicationManager.app;
 
@@ -46,10 +49,10 @@ public class WebDriverHelper {
 	wd.navigate().to(url);
     }
 
-    public void clearCookie()
-
-    {
-        wd.manage().deleteAllCookies();
+    public void clearCookie() {
+	Set<Cookie> allCookies = wd.manage().getCookies();
+	for (Cookie cookie : allCookies) {
+	    wd.manage().deleteCookieNamed(cookie.getName());
+	}
     }
-
 }

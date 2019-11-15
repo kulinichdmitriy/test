@@ -12,7 +12,7 @@ public class RegistrationTest extends TestSuiteBase {
 
     RegistrationDataProvider dp = new RegistrationDataProvider();
 
-    @Test(dataProvider = "RegDataProvider", dataProviderClass = RegistrationDataProvider.class, priority = 1)
+    @Test(dataProvider = "regDataProvider", dataProviderClass = RegistrationDataProvider.class, priority = 1)
     public void registration(String gender ) {
 	app().userModel().setAge(21);
 	app().userModel().setEmail("dmitriykulinich" + (new Date()).getTime() + "@maildrop.ropot.net");
@@ -77,7 +77,6 @@ public class RegistrationTest extends TestSuiteBase {
 
 	app().userModel().setCsrfToken(response.jsonPath().get("data.csrfToken.value").toString());
 	app().log().info(response.jsonPath().get("data.csrfToken.value").toString());
-
+	app().wd().clearCookie();
     }
-
 }
