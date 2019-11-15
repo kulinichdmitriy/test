@@ -1,5 +1,6 @@
 package test_suites;
 
+import core.data_providers.RegistrationDataProvider;
 import io.restassured.response.Response;
 import org.testng.TestException;
 import org.testng.annotations.Test;
@@ -10,8 +11,10 @@ import static core.ApplicationManager.app;
 
 public class RegistrationTest extends TestSuiteBase {
 
-    @Test(priority = 1)
-    public void registration() {
+   // RegistrationDataProvider registrationDataProvider = new RegistrationDataProvider();
+
+    @Test(dataProvider = "registrationDataProvider", priority = 1)
+    public void registration( String email, String password, String gender, String sexualOrientation, int age, String location, String autologinKey, String csfrToken) {
 	app().userModel().setAge(21);
 	app().userModel().setEmail("dmitriykulinich" + (new Date()).getTime() + "@maildrop.ropot.net");
 	app().userModel().setGenger("male");
@@ -53,7 +56,7 @@ public class RegistrationTest extends TestSuiteBase {
 	app().userModel().setAutologinKey(refreshToken);
     }
 
-    @Test(priority = 1, dependsOnMethods = "registration")
+    @Test//(priority = 2, dependsOnMethods = "registration")
     public void confirmation() {
 	// Make autologin
 	app().rest().request()
@@ -73,6 +76,8 @@ public class RegistrationTest extends TestSuiteBase {
 			.extract()
 			.response();
 
-	app().userModel().setcsrfToken(response.jsonPath().get("data.csrfToken.value"));
+	app().userModel().setCsrfToken(response.jsonPath().get("data.csrfToken.value").toString());
+	app().log().info(response.jsonPath().get("data.csrfToken.value").toString());
+
     }
 }

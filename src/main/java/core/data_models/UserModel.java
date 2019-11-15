@@ -1,5 +1,8 @@
 package core.data_models;
 
+import com.google.common.base.Strings;
+import org.testng.TestException;
+
 public class UserModel {
 
     private String email;
@@ -16,6 +19,9 @@ public class UserModel {
     }
 
     public UserModel setEmail(String email) {
+	if (Strings.isNullOrEmpty(email)) {
+	    throw new TestException(this.getClass().getName() + " email is not defined");
+	}
 	this.email = email;
 	return this;
     }
@@ -25,6 +31,9 @@ public class UserModel {
     }
 
     public UserModel setPassword(String password) {
+	if (Strings.isNullOrEmpty(password)) {
+	    throw new TestException(this.getClass().getName() + " password is not defined");
+	}
 	this.password = password;
 	return this;
     }
@@ -34,6 +43,9 @@ public class UserModel {
     }
 
     public UserModel setGenger(String gender) {
+	if (Strings.isNullOrEmpty(gender)) {
+	    throw new TestException(this.getClass().getName() + " gender is not defined");
+	}
 	this.gender = gender;
 	return this;
     }
@@ -43,6 +55,9 @@ public class UserModel {
     }
 
     public UserModel setSexualOrientation(String sexualOrientation) {
+	if (Strings.isNullOrEmpty(sexualOrientation)) {
+	    throw new TestException(this.getClass().getName() + " sexualOrientation is not defined");
+	}
 	this.sexualOrientation = sexualOrientation;
 	return this;
     }
@@ -52,6 +67,9 @@ public class UserModel {
     }
 
     public UserModel setAge(int age) {
+	if (age <= 18 || age >= 79) {
+	    throw new TestException(this.getClass().getName() + " age is not defined");
+	}
 	this.age = age;
 	return this;
     }
@@ -61,6 +79,9 @@ public class UserModel {
     }
 
     public UserModel setLocation(String location) {
+	if (Strings.isNullOrEmpty(location)) {
+	    throw new TestException(this.getClass().getName() + " location is not defined");
+	}
 	this.location = location;
 	return this;
     }
@@ -70,15 +91,21 @@ public class UserModel {
     }
 
     public UserModel setAutologinKey(String autologinKey) {
+	if (Strings.isNullOrEmpty(autologinKey)) {
+	    throw new TestException(this.getClass().getName() + " autologinKey is not defined");
+	}
 	this.autologinKey = autologinKey;
 	return this;
     }
 
-    public String setcsrfToken(String csrfToken) {
+    public String getCsrfToken() {
 	return csrfToken;
     }
 
-    public UserModel getcsrfToken(String csrfToken) {
+    public UserModel setCsrfToken(String csrfToken) {
+	if (Strings.isNullOrEmpty(csrfToken)) {
+	    throw new TestException(this.getClass().getName() + " setCsrfToken is not defined");
+	}
 	this.csrfToken = csrfToken;
 	return this;
     }
