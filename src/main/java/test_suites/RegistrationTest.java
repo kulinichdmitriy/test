@@ -53,6 +53,7 @@ public class RegistrationTest extends TestSuiteBase {
 	    throw new TestException("Registration failed, " + response.jsonPath().get("$"));
 	}
 	app().userModel().setAutologinKey(refreshToken);
+	app().rest().clearCookie();
     }
 
     @Test(priority = 2, dependsOnMethods = "registration")

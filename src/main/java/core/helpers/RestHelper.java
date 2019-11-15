@@ -12,11 +12,11 @@ import io.restassured.specification.RequestSpecification;
 import static io.restassured.RestAssured.given;
 
 public class RestHelper {
+    CookieFilter cookieFilter;
     private RequestSpecification baseSpecification;
 
     public RestHelper() {
 	baseSpecification = new RequestSpecBuilder()
-			.addFilter(new CookieFilter())
 			.addFilter(ResponseLoggingFilter.logResponseTo(LoggerHelper.getLogStream(), LogDetail.STATUS))
 			.addFilter(RequestLoggingFilter.logRequestTo(LoggerHelper.getLogStream()))
 			.addFilter(ErrorLoggingFilter.logErrorsTo(LoggerHelper.getLogStream()))
@@ -28,6 +28,18 @@ public class RestHelper {
     }
 
     public RequestSpecification request() {
-	return given().spec(baseSpecification);
+	return given().spec(baseSpecification)
+			.filter(this.getCookie());
+    }
+
+    private CookieFilter getCookie() {
+	if (cookieFilter == null) {
+	    cookieFilter = new CookieFilter();
+	}
+	return cookieFilter;
+    }
+
+    public void clearCookie() {
+	cookieFilter = null;
     }
 }
