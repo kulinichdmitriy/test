@@ -38,21 +38,12 @@ public class WebDriverHelper {
 
     public void quit() {
 	app().log().info("Close Chrome Driver ");
-
 	wd.close();
 	wd.quit();
     }
 
     public void openUrl(String url) {
 	app().log().info("Open URL: [ " + url + " ]");
-
 	wd.navigate().to(url);
-    }
-
-    public void clearCookie() {
-	Set<Cookie> allCookies = wd.manage().getCookies();
-	for (Cookie cookie : allCookies) {
-	    wd.manage().deleteCookieNamed(cookie.getName());
-	}
     }
 }

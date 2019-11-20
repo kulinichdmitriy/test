@@ -1,4 +1,4 @@
-package core.data_providers;
+package data_providers;
 
 import org.testng.annotations.DataProvider;
 

@@ -1,19 +1,15 @@
-package test_suites;
+package test_objects;
 
-import core.data_providers.RegistrationDataProvider;
 import io.restassured.response.Response;
 import org.testng.TestException;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+
 import java.util.Date;
+
 import static core.ApplicationManager.app;
 
-public class RegistrationTest extends TestSuiteBase {
+public class RegistrationTest {
 
-    RegistrationDataProvider dp = new RegistrationDataProvider();
-
-    @Test(dataProvider = "regDataProvider", dataProviderClass = RegistrationDataProvider.class, priority = 1)
-    public void registration(String gender ) {
+    public void registration(String gender) {
 	app().userModel().setAge(21);
 	app().userModel().setEmail("dmitriykulinich" + (new Date()).getTime() + "@maildrop.ropot.net");
 	app().userModel().setGenger("male");
@@ -28,7 +24,7 @@ public class RegistrationTest extends TestSuiteBase {
 
 	Response response = app().rest().request()
 			.header("X-Requested-With", "XMLHttpRequest")
-			.body("UserForm[gender]=" + gender//app().userModel().getGender()
+			.body("UserForm[gender]=" + gender
 					+ "&UserForm[sexual_orientation]=" + app().userModel().getSexualOrientation()
 					+ "&UserForm[age]=" + app().userModel().getAge()
 					+ "&UserForm[location]=" + app().userModel().getLocation()
@@ -53,10 +49,8 @@ public class RegistrationTest extends TestSuiteBase {
 	    throw new TestException("Registration failed, " + response.jsonPath().get("$"));
 	}
 	app().userModel().setAutologinKey(refreshToken);
-	app().rest().clearCookie();
     }
 
-    @Test(priority = 2, dependsOnMethods = "registration")
     public void confirmation() {
 	// Make autologin
 	app().rest().request()
@@ -64,7 +58,7 @@ public class RegistrationTest extends TestSuiteBase {
 			.get("https://www.flirt.com/site/autologin/key/" + app().userModel().getAutologinKey())
 			.then()
 			.statusCode(200);
-
+	app().log().info("AutologinKey - " + app().userModel().getAutologinKey());
 	// Get csrfToken
 	Response response = app().rest()
 			.request()
@@ -77,7 +71,5 @@ public class RegistrationTest extends TestSuiteBase {
 			.response();
 
 	app().userModel().setCsrfToken(response.jsonPath().get("data.csrfToken.value").toString());
-	app().log().info(response.jsonPath().get("data.csrfToken.value").toString());
-	app().wd().clearCookie();
     }
 }

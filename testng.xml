@@ -1,7 +1,7 @@
 <suite name="Test">
     <test name="testngTest">
         <classes>
-            <class name="test_suites.RegistrationTest"/>
+            <class name="test_suites.RegistrationTS"/>
         </classes>
     </test>
 </suite>

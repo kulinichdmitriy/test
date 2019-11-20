@@ -15,11 +15,13 @@ public class TestSuiteBase {
     @BeforeTest
     public void beforeTest() {
 	app().log().info("@BeforeTest");
+
     }
 
     @BeforeClass
     public void beforeClass() {
 	app().log().info("@BeforeClass");
+
     }
 
     @BeforeGroups
@@ -30,11 +32,13 @@ public class TestSuiteBase {
     @BeforeMethod
     public void beforeMethod() {
 	app().log().info("@BeforeMethod");
+
     }
 
     @AfterMethod
     public void afterMethod() {
 	app().log().info("@AfterMethod");
+
     }
 
     @AfterGroups
@@ -45,11 +49,13 @@ public class TestSuiteBase {
     @AfterClass
     public void afterClass() {
 	app().log().info("@AfterClass");
+
     }
 
     @AfterTest
     public void afterTest() {
 	app().log().info("@AfterTest");
+
     }
 
     @AfterSuite
