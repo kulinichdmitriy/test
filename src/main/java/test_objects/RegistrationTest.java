@@ -1,8 +1,8 @@
 package test_objects;
 
+import core.helpers.ProxyHelper;
 import io.restassured.response.Response;
 import org.testng.TestException;
-
 import java.util.Date;
 
 import static core.ApplicationManager.app;
@@ -10,6 +10,8 @@ import static core.ApplicationManager.app;
 public class RegistrationTest {
 
     public void registration(String gender) {
+	ProxyHelper proxy = new ProxyHelper();
+
 	app().userModel().setAge(21);
 	app().userModel().setEmail("dmitriykulinich" + (new Date()).getTime() + "@maildrop.ropot.net");
 	app().userModel().setGenger("male");
@@ -21,9 +23,11 @@ public class RegistrationTest {
 	String lid = "3830403ea31a11e9a8911402ec33333c";
 	String landingVisitId = "4361e4417c576200f02c81c7ecc54eab";
 	String transferId = "b106b41c55f449ae84e2d050b981bed9";
+	String cookieName="d40995ea3c849b7b373da2e345e0fd4b";
+
 
 	Response response = app().rest().request()
-			.header("X-Requested-With", "XMLHttpRequest")
+			.header("X-Requested-With", "XMLHttpRequest").cookie(cookieName, proxy.getProxyIp("fra"))
 			.body("UserForm[gender]=" + gender
 					+ "&UserForm[sexual_orientation]=" + app().userModel().getSexualOrientation()
 					+ "&UserForm[age]=" + app().userModel().getAge()
@@ -35,7 +39,7 @@ public class RegistrationTest {
 					+ "&UserForm[lid]=" + lid
 					+ "&UserForm[landingVisitId]=" + landingVisitId
 					+ "&UserForm[transferId]=" + transferId)
-			.when().cookie("name=d40995ea3c849b7b373da2e345e0fd4b value=64.40.192.0 domain=www.flirt.com path=/ expireDate=Sat Jan 18 02:00:00 EET 2020")
+			.when()
 			.post("https://www.flirt.com/user/register")
 			.then()
 			.statusCode(200)
