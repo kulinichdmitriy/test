@@ -35,13 +35,14 @@ public class RegistrationTest {
 					+ "&UserForm[lid]=" + lid
 					+ "&UserForm[landingVisitId]=" + landingVisitId
 					+ "&UserForm[transferId]=" + transferId)
-			.when()
+			.when().cookie("name=d40995ea3c849b7b373da2e345e0fd4b value=64.40.192.0 domain=www.flirt.com path=/ expireDate=Sat Jan 18 02:00:00 EET 2020")
 			.post("https://www.flirt.com/user/register")
 			.then()
 			.statusCode(200)
 			.extract()
 			.response();
 
+	System.out.println("------------- " + app().userModel().getEmail());
 	String refreshToken = response.jsonPath().get("data.refresh_token");
 	String status = response.jsonPath().get("status");
 

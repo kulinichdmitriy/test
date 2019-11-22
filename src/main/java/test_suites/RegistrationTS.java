@@ -8,12 +8,12 @@ import static core.ApplicationManager.app;
 
 public class RegistrationTS extends TestSuiteBase {
 
-    RegistrationTest test = new RegistrationTest();
+    RegistrationTest reg = new RegistrationTest();
 
     @Test(dataProvider = "regDataProvider", dataProviderClass = RegistrationDataProvider.class, priority = 1)
     public void registration(String gender) {
-	test.registration(gender);
-	test.confirmation();
+	reg.registration(gender);
+	reg.confirmation();
 	app().rest().clearCookie();
     }
 }
