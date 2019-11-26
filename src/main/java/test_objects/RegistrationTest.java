@@ -3,6 +3,7 @@ package test_objects;
 import core.helpers.ProxyHelper;
 import io.restassured.response.Response;
 import org.testng.TestException;
+
 import java.util.Date;
 
 import static core.ApplicationManager.app;
@@ -10,7 +11,7 @@ import static core.ApplicationManager.app;
 public class RegistrationTest {
 
     public void registration(String gender) {
-	ProxyHelper proxy = new ProxyHelper();
+	ProxyHelper proxyHelper = new ProxyHelper();
 
 	app().userModel().setAge(21);
 	app().userModel().setEmail("dmitriykulinich" + (new Date()).getTime() + "@maildrop.ropot.net");
@@ -23,11 +24,10 @@ public class RegistrationTest {
 	String lid = "3830403ea31a11e9a8911402ec33333c";
 	String landingVisitId = "4361e4417c576200f02c81c7ecc54eab";
 	String transferId = "b106b41c55f449ae84e2d050b981bed9";
-	String cookieName="d40995ea3c849b7b373da2e345e0fd4b";
-
+	String cookieName = "258a2738194f8ba6c3f6203326e0ec1c";
 
 	Response response = app().rest().request()
-			.header("X-Requested-With", "XMLHttpRequest").cookie(cookieName, proxy.getProxyIp("fra"))
+			.header("X-Requested-With", "XMLHttpRequest").cookie(cookieName, proxyHelper.getProxyIp("fra"))
 			.body("UserForm[gender]=" + gender
 					+ "&UserForm[sexual_orientation]=" + app().userModel().getSexualOrientation()
 					+ "&UserForm[age]=" + app().userModel().getAge()

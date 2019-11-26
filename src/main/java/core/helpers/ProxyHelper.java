@@ -1,15 +1,36 @@
 package core.helpers;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import static core.ApplicationManager.app;
 
 public class ProxyHelper {
-    public String getProxyIp(String country) {
+    private Properties property;
 
-	String getIp = app().property().getProperty(country);
+    public ProxyHelper() {
+	String filename = "country_ip.properties";
+	try {
+	    app().log().info("Open Properies file: [ " + filename + " ]");
+
+	    FileInputStream fis = new FileInputStream("src/main/resources/" + filename);
+	    property = new Properties();
+	    property.load(fis);
+	} catch (IOException e) {
+	    app().log().error("No property file: " + e);
+	}
+    }
+
+    public String getProxyIp(String prop) {
+	app().log().info("Get property: [ " + prop + " ] from file");
+
+	String pr = property.getProperty(prop);
 	String[] mass;
-	String delimetr = "-";
-	mass = getIp.split(delimetr);
-	int a = (int) (Math.random() * 5);
+	String delimetr = ", ";
+	mass = pr.split(delimetr);
+	int a = (int) (Math.random() * 4);
 	return mass[a];
     }
+
 }
