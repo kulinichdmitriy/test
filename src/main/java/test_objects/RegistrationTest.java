@@ -25,6 +25,7 @@ public class RegistrationTest {
 	String landingVisitId = "4361e4417c576200f02c81c7ecc54eab";
 	String transferId = "b106b41c55f449ae84e2d050b981bed9";
 	String cookieName = "258a2738194f8ba6c3f6203326e0ec1c";
+	//https://my.platformphoenix.com/site/ipCookie
 
 	Response response = app().rest().request()
 			.header("X-Requested-With", "XMLHttpRequest").cookie(cookieName, proxyHelper.getProxyIp("fra"))
