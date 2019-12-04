@@ -12,6 +12,7 @@ public class ApplicationManager {
     private DateTimeHelper dateTimeHelper;
     private RestHelper restHelper;
     private UserModel userModel;
+    private AuthHelper authHelper;
 
     private ApplicationManager() {
     }
@@ -63,5 +64,12 @@ public class ApplicationManager {
 	    restHelper = new RestHelper();
 	}
 	return restHelper;
+    }
+
+    public AuthHelper authHelper() {
+	if (authHelper == null) {
+	    authHelper = new AuthHelper();
+	}
+	return authHelper;
     }
 }

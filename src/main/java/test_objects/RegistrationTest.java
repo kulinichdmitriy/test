@@ -17,18 +17,18 @@ public class RegistrationTest {
 	app().userModel().setEmail("dmitriykulinich" + (new Date()).getTime() + "@maildrop.ropot.net");
 	app().userModel().setGenger("male");
 	app().userModel().setPassword("asdasd123");
-	app().userModel().setLocation("Dnipropetrovsk,+49000");
+	app().userModel().setLocation("Dnipropetrovsk, 49000");
 	app().userModel().setSexualOrientation("hetero");
 	Boolean termsConsent = true;
 	Boolean policyConsent = true;
 	String lid = "3830403ea31a11e9a8911402ec33333c";
 	String landingVisitId = "4361e4417c576200f02c81c7ecc54eab";
 	String transferId = "b106b41c55f449ae84e2d050b981bed9";
-	String cookieName = "258a2738194f8ba6c3f6203326e0ec1c";
+	String cookieName = "05f74cb8654bef0ae4d0f3cd76a92879";
 	//https://my.platformphoenix.com/site/ipCookie
 
 	Response response = app().rest().request()
-			.header("X-Requested-With", "XMLHttpRequest").cookie(cookieName, proxyHelper.getProxyIp("fra"))
+			.header("X-Requested-With", "XMLHttpRequest").cookie(cookieName, proxyHelper.getProxyIp("can"))
 			.body("UserForm[gender]=" + gender
 					+ "&UserForm[sexual_orientation]=" + app().userModel().getSexualOrientation()
 					+ "&UserForm[age]=" + app().userModel().getAge()
