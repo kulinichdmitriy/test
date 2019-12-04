@@ -2,4 +2,4 @@
 ideamaven.iml
 .idea
 /reports
-project.properties
+/src/main/resources/access.properties
