@@ -8,6 +8,15 @@ import java.io.PrintStream;
 
 public class LoggerHelper {
 
+    /**
+     * Get log stream
+     *
+     * @return
+     */
+    public static PrintStream getLogStream() {
+	return IoBuilder.forLogger(RestHelper.class).buildPrintStream();
+    }
+
     private Logger log() {
 	return LogManager.getLogger(getClassName(4));
     }
@@ -26,12 +35,5 @@ public class LoggerHelper {
 
     public void error(String message) {
 	this.log().error(message);
-    }
-    /**
-     * Get log stream
-     * @return
-     */
-    public static PrintStream getLogStream() {
-	return IoBuilder.forLogger(RestHelper.class).buildPrintStream();
     }
 }

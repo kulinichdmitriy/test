@@ -9,12 +9,11 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 
 import static core.ApplicationManager.app;
+import static core.ApplicationManager.app;
 
 public class SplitTest {
 
     public static void main(String[] args) throws IOException {
-
-	app().authHelper().authPhoenix();
 	String baseUrl = "https://m.seksverlangen.be/ppc.php?dynamicpage=all_mlp_mst_jumplp_t_v3";
 	String cookieName = "7bd0ed41034abdc0021d05d1c84eacf1"; // Ежедневно обновляется в админке, без него прокся не пашет
 	String splitId1 = "9cd89acdad2011e896341402ec33333c";
@@ -22,11 +21,10 @@ public class SplitTest {
 	int id1 = 0;
 	int id2 = 0;
 
-	ProxyHelper proxyHelper = new ProxyHelper();
-
 	for (int i = 0; i < 1; i++) {
 	    Response response = app().rest().request()
-			    .header("X-Requested-With", "XMLHttpRequest").cookie(cookieName, proxyHelper.getProxyIp("bel"))
+			    .header("X-Requested-With", "XMLHttpRequest")
+			    .cookie(cookieName, app().proxy().getIp("bel"))
 			    .when()
 			    .get(baseUrl)
 			    .then()

@@ -7,25 +7,22 @@ import java.util.Properties;
 import static core.ApplicationManager.app;
 
 public class PropertiesHelper {
-
-    private Properties property;
+    private Properties properties;
 
     public PropertiesHelper(String filename) {
 	try {
-	    app().log().info("Open Properies file: [ " + filename + " ]");
+	    app().log().info("Open properties file: " + filename);
 
 	    FileInputStream fis = new FileInputStream("src/main/resources/" + filename);
-	    property = new Properties();
-	    property.load(fis);
+	    properties = new Properties();
+	    properties.load(fis);
 	} catch (IOException e) {
 	    app().log().error("No property file: " + e);
 	}
     }
 
-    public String getProperty(String prop) {
-	app().log().info("Get property: [ " + prop + " ] from file");
-
-	String pr = property.getProperty(prop);
-	return pr;
+    public String getProperty(String property) {
+	app().log().info("Get property: [" + property + "]");
+	return properties.getProperty(property);
     }
 }

@@ -1,34 +1,39 @@
 package test_objects;
 
-import core.helpers.ProxyHelper;
+import backend.page_objects.BackendSiteIpCookiePage;
 import io.restassured.response.Response;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.testng.TestException;
+import org.testng.util.Strings;
 
 import java.util.Date;
 
 import static core.ApplicationManager.app;
 
 public class RegistrationTest {
-
     public void registration(String gender) {
-	ProxyHelper proxyHelper = new ProxyHelper();
-
 	app().userModel().setAge(21);
 	app().userModel().setEmail("dmitriykulinich" + (new Date()).getTime() + "@maildrop.ropot.net");
 	app().userModel().setGenger("male");
 	app().userModel().setPassword("asdasd123");
-	app().userModel().setLocation("Dnipropetrovsk, 49000");
 	app().userModel().setSexualOrientation("hetero");
 	Boolean termsConsent = true;
 	Boolean policyConsent = true;
 	String lid = "3830403ea31a11e9a8911402ec33333c";
 	String landingVisitId = "4361e4417c576200f02c81c7ecc54eab";
 	String transferId = "b106b41c55f449ae84e2d050b981bed9";
-	String cookieName = "05f74cb8654bef0ae4d0f3cd76a92879";
-	//https://my.platformphoenix.com/site/ipCookie
+
+	BackendSiteIpCookiePage ipCookiePage = new BackendSiteIpCookiePage();
+	String ipCookieName = ipCookiePage.getIpCookieName();
+	String country = "can";
+	app().userModel().setLocation(this.getLocationFromIndex(ipCookieName, country));
 
 	Response response = app().rest().request()
-			.header("X-Requested-With", "XMLHttpRequest").cookie(cookieName, proxyHelper.getProxyIp("can"))
+			.header("X-Requested-With", "XMLHttpRequest")
+			.cookie(ipCookieName, app().proxy().getIp(country))
 			.body("UserForm[gender]=" + gender
 					+ "&UserForm[sexual_orientation]=" + app().userModel().getSexualOrientation()
 					+ "&UserForm[age]=" + app().userModel().getAge()
@@ -47,7 +52,6 @@ public class RegistrationTest {
 			.extract()
 			.response();
 
-	System.out.println("------------- " + app().userModel().getEmail());
 	String refreshToken = response.jsonPath().get("data.refresh_token");
 	String status = response.jsonPath().get("status");
 
@@ -63,7 +67,7 @@ public class RegistrationTest {
 			.when()
 			.get("https://www.flirt.com/site/autologin/key/" + app().userModel().getAutologinKey())
 			.then()
-			.statusCode(200);
+			.statusCode(302);
 	app().log().info("AutologinKey - " + app().userModel().getAutologinKey());
 	// Get csrfToken
 	Response response = app().rest()
@@ -77,5 +81,45 @@ public class RegistrationTest {
 			.response();
 
 	app().userModel().setCsrfToken(response.jsonPath().get("data.csrfToken.value").toString());
+    }
+
+    /**
+     * Get location from index page
+     *
+     * @return String location
+     */
+    private String getLocationFromIndex(String ipCookieName, String country) {
+	Response response = app().rest().request()
+			.cookie(ipCookieName, app().proxy().getIp(country))
+			.when()
+			.get("https://www.benaughty.com")
+			.then()
+			.statusCode(200)
+			.extract()
+			.response();
+
+	String location = "";
+	Elements userForms;
+
+	try {
+	    Document doc = Jsoup.parse(response.asString());
+	    doc.outputSettings().charset("UTF-8");
+	    userForms = doc.getElementsByAttributeValueMatching("name", "location");
+	} catch (Exception ex) {
+	    throw new TestException(this.getClass().getName() + " Unable to get location from index: " + ex);
+	}
+
+	for (Element form : userForms) {
+	    location = form.attr("value");
+	    if (!Strings.isNullOrEmpty(location)) {
+		break;
+	    }
+	}
+
+	if (location.isEmpty()) {
+	    app().log().error("Index page field location is empty!");
+	    return "London";
+	}
+	return location;
     }
 }

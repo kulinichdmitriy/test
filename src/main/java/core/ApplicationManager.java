@@ -4,15 +4,13 @@ import core.data_models.UserModel;
 import core.helpers.*;
 
 public class ApplicationManager {
-
     public static ApplicationManager applicationManager;
     private WebDriverHelper webDriverHelper;
-    private PropertiesHelper propertiesHelper;
     private LoggerHelper loggerHelper;
     private DateTimeHelper dateTimeHelper;
     private RestHelper restHelper;
     private UserModel userModel;
-    private AuthHelper authHelper;
+    private ProxyHelper proxyHelper;
 
     private ApplicationManager() {
     }
@@ -45,13 +43,6 @@ public class ApplicationManager {
 	return webDriverHelper;
     }
 
-    public PropertiesHelper property() {
-	if (propertiesHelper == null) {
-	    propertiesHelper = new PropertiesHelper("project.properties");
-	}
-	return propertiesHelper;
-    }
-
     public DateTimeHelper dateTime() {
 	if (dateTimeHelper == null) {
 	    dateTimeHelper = new DateTimeHelper();
@@ -66,10 +57,10 @@ public class ApplicationManager {
 	return restHelper;
     }
 
-    public AuthHelper authHelper() {
-	if (authHelper == null) {
-	    authHelper = new AuthHelper();
+    public ProxyHelper proxy() {
+	if (proxyHelper == null) {
+	    proxyHelper = new ProxyHelper();
 	}
-	return authHelper;
+	return proxyHelper;
     }
 }

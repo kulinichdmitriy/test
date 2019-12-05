@@ -29,6 +29,7 @@ public class RestHelper {
 
     public RequestSpecification request() {
 	return given().spec(baseSpecification)
+			.redirects().follow(false)
 			.filter(this.getCookie());
     }
 
