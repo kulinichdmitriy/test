@@ -8,7 +8,7 @@ import static core.ApplicationManager.app;
 
 public class BackendIndexPage {
     /**
-     * Authentication to Bsystem
+     * Authentication to Backend
      *
      * @return true or false
      */
@@ -26,15 +26,15 @@ public class BackendIndexPage {
 	    String message = ex.getMessage();
 
 	    if (message.contains("401")) {
-		throw new TestException("Unable to do Bsystem Basic auth using userName ["
+		throw new TestException("Unable to do Backend Basic auth using userName ["
 				+ Config.access().getProperty("phoenix.login") + "]: " + ex);
 	    } else if (message.contains("200")) {
-		throw new TestException("Unable to login Bsystem using userName ["
-				+ Config.access().getProperty("phoenix.password") + "]: " + ex);
+		throw new TestException("Unable to login Backend using userName ["
+				+ Config.access().getProperty("phoenix.login") + "]: " + ex);
 	    } else if (message.contains("500") || message.contains("502")) {
-		app().log().warning("Unable to login Bsystem");
+		app().log().warning("Unable to login Backend");
 	    } else {
-		throw new TestException("Unable to login Bsystem: " + ex);
+		throw new TestException("Unable to login Backend: " + ex);
 	    }
 	    return false;
 	}
