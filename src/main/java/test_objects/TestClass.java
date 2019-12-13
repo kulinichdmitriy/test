@@ -2,11 +2,10 @@ package test_objects;
 
 import backend.page_objects.BackendIndexPage;
 import io.restassured.response.Response;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static core.ApplicationManager.app;
@@ -14,15 +13,31 @@ import static core.ApplicationManager.app;
 public class TestClass {
 
     public static void main(String[] args) {
-
-	String splitPageName = "all_mlp_5st_downshift_a";
+	String splitId = "cd2d011921ea9880c46800912e1a53a1";
 
 	BackendIndexPage login = new BackendIndexPage();
 	login.auth();
+
+	TestClass splitPage = new TestClass();
+	Map<String, String> splitData = splitPage.getSplitData(splitId);
+	String[] array = splitData.get("variations").split(",");
+	List<String> variations = Arrays.asList(array);
+
+	Map<String, String> pageData = splitPage.getPageData(variations);
+
+	pageData.forEach((k, v) -> System.out.println(k + " => " + v));
+    }
+
+    /**
+     * Get split data by splitId
+     *
+     * @param splitId
+     * @return Map<String, String> splitDat
+     */
+    public Map<String, String> getSplitData(String splitId) {
 	Response response = app().rest()
 			.request()
 			.header("X-Requested-With", "XMLHttpRequest")
-			.body("application\\modules\\admin\\models\\LandingSplitFiltersForm[status]: on")
 			.when()
 			.get("https://my.platformphoenix.com/landing/splitList")
 			.then()
@@ -30,20 +45,20 @@ public class TestClass {
 			.extract()
 			.response();
 
-	String id = "bfd3ce40308a2631de076ec558201472";
-	Map<String, String> mass = response.jsonPath().get("activeDataProvider.rawData.find{it.splitId=='" + id + "'}");
-	/*
-	Get lid
-	 */
-	String variations = mass.get("variations");
-	String[] pageName = variations.split(",");
-	String page1 = pageName[0];
-	String page2 = pageName[1];
+	Map<String, String> splitData = response.jsonPath().get("activeDataProvider.rawData.find{it.splitId=='" + splitId + "'}");
+	return splitData;
+    }
 
-	Response getLid = app().rest()
+    /**
+     * Get page data by variations
+     *
+     * @param variations
+     * @return Map<String, String> pageData
+     */
+    public Map<String, String> getPageData(List<String> variations) {
+	Response response = app().rest()
 			.request()
 			.header("X-Requested-With", "XMLHttpRequest")
-			.body("ArrayProviderLandingFilterForm[name]:"+page1+"")
 			.when()
 			.get("https://my.platformphoenix.com/landing/pageList")
 			.then()
@@ -51,19 +66,18 @@ public class TestClass {
 			.extract()
 			.response();
 
+	Map<String, String> pageData = new HashMap<>();
 
-	Document doc = Jsoup.parse(getLid.toString());
-	System.out.println(doc);
+	for (String pageName : variations) {
+	    Map<String, String> data = response.jsonPath().get("activeDataProvider.rawData.find{it.name=='" + pageName + "'}");
+	    String landingId = data.get("landingId");
 
-
-	String countryGeo = mass.get("countryGeo");
-
-	String percentage = mass.get("percentage");
-	String utm_source = mass.get("utm_source");
-	String siteName = "flirt.com";
-
-	//SplitTest splitTest = new SplitTest();
-	//splitTest.SplitTest(splitPageName, utm_source, countryGeo, siteName, page1, page2);
-
+	    if (landingId.isEmpty()) {
+		app().log().error("Unable to get landingId by pageName [" + pageName + "]");
+		continue;
+	    }
+	    pageData.put(pageName, landingId);
+	}
+	return pageData;
     }
 }
