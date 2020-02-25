@@ -13,7 +13,7 @@ import static core.ApplicationManager.app;
 public class TestClass {
 
     public static void main(String[] args) {
-	String splitId = "cd2d011921ea9880c46800912e1a53a1";
+	String splitId = "f65c341abe4379d961c4037b1dcb4e54";
 
 	BackendIndexPage login = new BackendIndexPage();
 	login.auth();
@@ -32,7 +32,7 @@ public class TestClass {
      * Get split data by splitId
      *
      * @param splitId
-     * @return Map<String, String> splitDat
+     * @return Map<String ,   String> splitDat
      */
     public Map<String, String> getSplitData(String splitId) {
 	Response response = app().rest()
@@ -53,7 +53,7 @@ public class TestClass {
      * Get page data by variations
      *
      * @param variations
-     * @return Map<String, String> pageData
+     * @return Map<String ,   String> pageData
      */
     public Map<String, String> getPageData(List<String> variations) {
 	Response response = app().rest()

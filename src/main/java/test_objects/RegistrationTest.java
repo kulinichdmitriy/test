@@ -14,12 +14,8 @@ import java.util.Date;
 import static core.ApplicationManager.app;
 
 public class RegistrationTest {
-    public void registration(String gender) {
-	app().userModel().setAge(21);
+    public void registration(String gender, String orientation, String pass, int age) {
 	app().userModel().setEmail("dmitriykulinich" + (new Date()).getTime() + "@maildrop.ropot.net");
-	app().userModel().setGenger("male");
-	app().userModel().setPassword("asdasd123");
-	app().userModel().setSexualOrientation("hetero");
 	Boolean termsConsent = true;
 	Boolean policyConsent = true;
 	String lid = "3830403ea31a11e9a8911402ec33333c";
@@ -35,11 +31,11 @@ public class RegistrationTest {
 			.header("X-Requested-With", "XMLHttpRequest")
 			.cookie(ipCookieName, app().proxy().getIp(country))
 			.body("UserForm[gender]=" + gender
-					+ "&UserForm[sexual_orientation]=" + app().userModel().getSexualOrientation()
-					+ "&UserForm[age]=" + app().userModel().getAge()
+					+ "&UserForm[sexual_orientation]=" + orientation
+					+ "&UserForm[age]=" + age
 					+ "&UserForm[location]=" + app().userModel().getLocation()
 					+ "&UserForm[email]=" + app().userModel().getEmail()
-					+ "&UserForm[password]=" + app().userModel().getPassword()
+					+ "&UserForm[password]=" + pass
 					+ "&UserForm[termsConsent]=" + termsConsent
 					+ "&UserForm[policyConsent]=" + policyConsent
 					+ "&UserForm[lid]=" + lid
