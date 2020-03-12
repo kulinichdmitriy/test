@@ -1,5 +1,6 @@
 package test_suites;
 
+import core.data_models.UserModel;
 import data_providers.RegistrationDataProvider;
 import org.testng.annotations.Test;
 import test_objects.RegistrationTest;
@@ -11,9 +12,9 @@ public class RegistrationTS extends TestSuiteBase {
     RegistrationTest reg = new RegistrationTest();
 
     @Test(dataProvider = "regDataProvider", dataProviderClass = RegistrationDataProvider.class, priority = 1)
-    public void registration(String gender, String orientation, String pass, int age) {
+    public void registration(UserModel userModel) {
 
-	reg.registration(gender, orientation, pass, age);
+	reg.registration(userModel);
 	reg.confirmation();
 	app().rest().clearCookie();
     }

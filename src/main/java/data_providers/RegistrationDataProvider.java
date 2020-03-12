@@ -3,6 +3,8 @@ package data_providers;
 import core.data_models.UserModel;
 import org.testng.annotations.DataProvider;
 
+import java.util.Date;
+
 public class RegistrationDataProvider {
 
     @DataProvider(name = "regDataProvider")
@@ -10,14 +12,16 @@ public class RegistrationDataProvider {
 	UserModel userModelMale = new UserModel();
 	userModelMale.setGenger("male");
 	userModelMale.setSexualOrientation("hetero");
-	userModelMale.setPassword("123456");
+	userModelMale.setPassword("asdqwe123");
 	userModelMale.setAge(20);
+	userModelMale.setEmail("dmitriykulinich" + (new Date()).getTime() + "@maildrop.ropot.net");
 
 	UserModel userModelFemale = new UserModel();
 	userModelFemale.setGenger("female");
 	userModelFemale.setSexualOrientation("homo");
 	userModelFemale.setPassword("asdqwe");
 	userModelFemale.setAge(50);
+	userModelMale.setEmail("dmitriykulinich" + (new Date()).getTime() + "@maildrop.ropot.net");
 
 	return new Object[][] {
 			{ userModelMale },

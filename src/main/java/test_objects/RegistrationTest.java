@@ -1,6 +1,7 @@
 package test_objects;
 
 import backend.page_objects.BackendSiteIpCookiePage;
+import core.data_models.UserModel;
 import io.restassured.response.Response;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -9,13 +10,12 @@ import org.jsoup.select.Elements;
 import org.testng.TestException;
 import org.testng.util.Strings;
 
-import java.util.Date;
-
 import static core.ApplicationManager.app;
 
 public class RegistrationTest {
-    public void registration(String gender, String orientation, String pass, int age) {
-	app().userModel().setEmail("dmitriykulinich" + (new Date()).getTime() + "@maildrop.ropot.net");
+
+    public void registration(UserModel userModel) {
+
 	Boolean termsConsent = true;
 	Boolean policyConsent = true;
 	String lid = "3830403ea31a11e9a8911402ec33333c";
@@ -30,12 +30,12 @@ public class RegistrationTest {
 	Response response = app().rest().request()
 			.header("X-Requested-With", "XMLHttpRequest")
 			.cookie(ipCookieName, app().proxy().getIp(country))
-			.body("UserForm[gender]=" + gender
-					+ "&UserForm[sexual_orientation]=" + orientation
-					+ "&UserForm[age]=" + age
+			.body("UserForm[gender]=" + app().userModel().getGender()
+					+ "&UserForm[sexual_orientation]=" + app().userModel().getSexualOrientation()
+					+ "&UserForm[age]=" + app().userModel().getAge()
 					+ "&UserForm[location]=" + app().userModel().getLocation()
 					+ "&UserForm[email]=" + app().userModel().getEmail()
-					+ "&UserForm[password]=" + pass
+					+ "&UserForm[password]=" + app().userModel().getPassword()
 					+ "&UserForm[termsConsent]=" + termsConsent
 					+ "&UserForm[policyConsent]=" + policyConsent
 					+ "&UserForm[lid]=" + lid
