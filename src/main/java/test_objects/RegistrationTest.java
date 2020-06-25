@@ -8,11 +8,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.testng.TestException;
+import org.testng.annotations.Test;
 import org.testng.util.Strings;
 
 import static core.ApplicationManager.app;
 
 public class RegistrationTest {
+
 
     public void registration(UserModel userModel) {
 
@@ -30,12 +32,12 @@ public class RegistrationTest {
 	Response response = app().rest().request()
 			.header("X-Requested-With", "XMLHttpRequest")
 			.cookie(ipCookieName, app().proxy().getIp(country))
-			.body("UserForm[gender]=" + app().userModel().getGender()
-					+ "&UserForm[sexual_orientation]=" + app().userModel().getSexualOrientation()
-					+ "&UserForm[age]=" + app().userModel().getAge()
-					+ "&UserForm[location]=" + app().userModel().getLocation()
-					+ "&UserForm[email]=" + app().userModel().getEmail()
-					+ "&UserForm[password]=" + app().userModel().getPassword()
+			.body("UserForm[gender]=" + userModel.getGender()
+					+ "&UserForm[sexual_orientation]=" + userModel.getSexualOrientation()
+					+ "&UserForm[age]=" + userModel.getAge()
+					+ "&UserForm[location]=" + userModel.getLocation()
+					+ "&UserForm[email]=" + userModel.getEmail()
+					+ "&UserForm[password]=" + userModel.getPassword()
 					+ "&UserForm[termsConsent]=" + termsConsent
 					+ "&UserForm[policyConsent]=" + policyConsent
 					+ "&UserForm[lid]=" + lid
