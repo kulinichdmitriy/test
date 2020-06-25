@@ -21,7 +21,7 @@ public class RegistrationDataProvider {
 	userModelFemale.setSexualOrientation("homo");
 	userModelFemale.setPassword("asdqwe");
 	userModelFemale.setAge(50);
-	userModelMale.setEmail("dmitriykulinich" + (new Date()).getTime() + "@maildrop.ropot.net");
+	userModelFemale.setEmail("dmitriykulinich1" + (new Date()).getTime() + "@maildrop.ropot.net");
 
 	return new Object[][] {
 			{ userModelMale },

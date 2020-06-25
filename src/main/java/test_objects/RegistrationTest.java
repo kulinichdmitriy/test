@@ -2,6 +2,7 @@ package test_objects;
 
 import backend.page_objects.BackendSiteIpCookiePage;
 import core.data_models.UserModel;
+import data_providers.RegistrationDataProvider;
 import io.restassured.response.Response;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,7 +15,6 @@ import org.testng.util.Strings;
 import static core.ApplicationManager.app;
 
 public class RegistrationTest {
-
 
     public void registration(UserModel userModel) {
 
@@ -35,7 +35,7 @@ public class RegistrationTest {
 			.body("UserForm[gender]=" + userModel.getGender()
 					+ "&UserForm[sexual_orientation]=" + userModel.getSexualOrientation()
 					+ "&UserForm[age]=" + userModel.getAge()
-					+ "&UserForm[location]=" + userModel.getLocation()
+					+ "&UserForm[location]=" + app().userModel().getLocation()
 					+ "&UserForm[email]=" + userModel.getEmail()
 					+ "&UserForm[password]=" + userModel.getPassword()
 					+ "&UserForm[termsConsent]=" + termsConsent
