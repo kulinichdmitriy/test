@@ -14,8 +14,13 @@ public class RegistrationTS extends TestSuiteBase {
     @Test(dataProvider = "regDataProvider", dataProviderClass = RegistrationDataProvider.class, priority = 1)
     public void registration(UserModel userModel) {
 
-	reg.registration(userModel);
-	reg.confirmation();
-	app().rest().clearCookie();
+        reg.registration(userModel);
+        app().rest().clearCookie();
+    }
+
+    @Test(dependsOnMethods = {"registration"})
+    public void confirm() {
+        reg.confirmation();
+
     }
 }
