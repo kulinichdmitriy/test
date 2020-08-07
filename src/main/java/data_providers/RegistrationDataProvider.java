@@ -9,23 +9,16 @@ public class RegistrationDataProvider {
 
     @DataProvider(name = "regDataProvider")
     public static Object[][] regDataProvider() {
-	UserModel userModelMale = new UserModel();
-	userModelMale.setGenger("male");
-	userModelMale.setSexualOrientation("hetero");
-	userModelMale.setPassword("asdqwe123");
-	userModelMale.setAge(20);
-	userModelMale.setEmail("dmitriykulinich" + (new Date()).getTime() + "@maildrop.ropot.net");
+        UserModel userModelMale = new UserModel();
+        userModelMale.setGenger("male");
+        userModelMale.setSexualOrientation("hetero");
+        userModelMale.setPassword("asdqwe123");
+        userModelMale.setAge(20);
+        userModelMale.setEmail("dmitriykulinich" + (new Date()).getTime() + "@maildrop.ropot.net");
 
-	UserModel userModelFemale = new UserModel();
-	userModelFemale.setGenger("female");
-	userModelFemale.setSexualOrientation("homo");
-	userModelFemale.setPassword("asdqwe");
-	userModelFemale.setAge(50);
-	userModelFemale.setEmail("dmitriykulinich1" + (new Date()).getTime() + "@maildrop.ropot.net");
+        return new Object[][]{
+                {userModelMale}
 
-	return new Object[][] {
-			{ userModelMale },
-			{ userModelFemale },
-	};
+        };
     }
 }
