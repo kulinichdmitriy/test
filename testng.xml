@@ -1,6 +1,6 @@
 <suite name="Test">
     <test name="testngTest">
-        <classes>
+        <classes preserve-order="true">
             <class name="test_suites.RegistrationTS"/>
         </classes>
     </test>
