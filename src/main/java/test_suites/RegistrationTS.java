@@ -28,7 +28,7 @@ public class RegistrationTS extends TestSuiteBase {
         reg.funnel();
     }
 
-    @Test(groups = "disableNotification",dependsOnMethods = {"funnel"})
+    @Test(dependsOnMethods = {"funnel"})
     public void disableNotification()
     {
         reg.disableNotificationSettings();

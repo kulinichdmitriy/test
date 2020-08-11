@@ -77,16 +77,15 @@ public class RegistrationTest {
                 + token + "\"}}";
         String body = "data=" + UrlHelper.urlEncoderJson(data) + "&CSRF_TOKEN=" + token;
 
-        Response response = app().rest().request()
+        app().rest().request()
                 .header("X-Requested-With", "XMLHttpRequest")
                 .cookie(getCookie())
                 .body(body)
                 .when()
                 .post("https://www.flirt.com/api/v1/funnel")
                 .then()
-                .statusCode(200)
-                .extract()
-                .response();
+                .statusCode(200);
+
     }
 
     public void confirmation() {
@@ -126,6 +125,7 @@ public class RegistrationTest {
                 .statusCode(200)
                 .extract()
                 .response();
+
 
         String location = "";
         Elements userForms;
@@ -167,16 +167,14 @@ public class RegistrationTest {
                 "NotificationSettingsForm[Ask for detailsAdded][site]=false&";
         String body = data + "&CSRF_TOKEN=" + token;
 
-        Response response = app().rest().request()
+        app().rest().request()
                 .header("X-Requested-With", "XMLHttpRequest")
                 .cookie(getCookie())
                 .body(body)
                 .when()
                 .post("https://www.flirt.com/api/v1/account/notificationSettings")
                 .then()
-                .statusCode(200)
-                .extract()
-                .response();
+                .statusCode(200);
     }
 
     public void disableNotificationMessages() {
@@ -184,16 +182,14 @@ public class RegistrationTest {
         String data = "NotificationMessagesForm[Promo messages][messages]=false&";
         String body = data + "&CSRF_TOKEN=" + token;
 
-        Response response = app().rest().request()
+        app().rest().request()
                 .header("X-Requested-With", "XMLHttpRequest")
                 .cookie(getCookie())
                 .body(body)
                 .when()
                 .post("https://www.flirt.com/api/v1/account/notificationMessages")
                 .then()
-                .statusCode(200)
-                .extract()
-                .response();
+                .statusCode(200);
     }
 
     public void disableUserSubscription() {
@@ -220,16 +216,14 @@ public class RegistrationTest {
                 "UserSubscriptionForm[sms][Service alerts]=0&";
         String body = data + "&CSRF_TOKEN=" + token;
 
-        Response response = app().rest().request()
+        app().rest().request()
                 .header("X-Requested-With", "XMLHttpRequest")
                 .cookie(getCookie())
                 .body(body)
                 .when()
                 .post("https://www.flirt.com/api/v1/userSubscription")
                 .then()
-                .statusCode(200)
-                .extract()
-                .response();
+                .statusCode(200);
     }
 
 }
