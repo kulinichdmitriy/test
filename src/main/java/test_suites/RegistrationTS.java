@@ -28,6 +28,24 @@ public class RegistrationTS extends TestSuiteBase {
         reg.funnel();
     }
 
+    @Test(dependsOnMethods = {"funnel"})
+    public void disableNotificationSettings()
+    {
+        reg.disableNotificationSettings();
+    }
+
+    @Test(dependsOnMethods = {"disableNotificationSettings"})
+    public void disableNotificationMessages()
+    {
+        reg.disableNotificationMessages();
+    }
+
+    @Test(dependsOnMethods = {"disableNotificationMessages"})
+    public void disableUserSubscription()
+    {
+        reg.disableUserSubscription();
+    }
+
     @AfterTest
     public void clearCookie() {
         app().rest().clearCookie();
