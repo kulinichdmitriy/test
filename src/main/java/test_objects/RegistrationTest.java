@@ -154,7 +154,17 @@ public class RegistrationTest {
 
     public void disableNotificationSettings() {
         String token = app().userModel().getCsrfToken();
-        String data = "NotificationSettingsForm%5BUser+like%5D%5Bsite%5D=false&NotificationSettingsForm%5BUser+match%5D%5Bsite%5D=false&NotificationSettingsForm%5BNotifications+from+admin%5D%5Bsite%5D=false&NotificationSettingsForm%5BNew+message%5D%5Bsite%5D=false&NotificationSettingsForm%5BNew+browse%5D%5Bsite%5D=false&NotificationSettingsForm%5BUser+alert+new+photo%5D%5Bsite%5D=false&NotificationSettingsForm%5BUser+alert+new+member%5D%5Bsite%5D=false&NotificationSettingsForm%5BAsk+for+photo%5D%5Bsite%5D=false&NotificationSettingsForm%5BAsk+for+details%5D%5Bsite%5D=false&NotificationSettingsForm%5BAsk+for+photoUploaded%5D%5Bsite%5D=false&NotificationSettingsForm%5BAsk+for+detailsAdded%5D%5Bsite%5D=false";
+        String data = "NotificationSettingsForm[User like][site]=false&" +
+                "NotificationSettingsForm[User match][site]=false&" +
+                "NotificationSettingsForm[Notifications from admin][site]=false&" +
+                "NotificationSettingsForm[New message][site]=false&" +
+                "NotificationSettingsForm[New browse][site]=false&" +
+                "NotificationSettingsForm[User alert new photo][site]=false&" +
+                "NotificationSettingsForm[User alert new member][site]=false&" +
+                "NotificationSettingsForm[Ask for photo][site]=false&" +
+                "NotificationSettingsForm[Ask for details][site]=false&" +
+                "NotificationSettingsForm[Ask for photoUploaded][site]=false&" +
+                "NotificationSettingsForm[Ask for detailsAdded][site]=false&";
         String body = data + "&CSRF_TOKEN=" + token;
 
         Response response = app().rest().request()
@@ -171,7 +181,7 @@ public class RegistrationTest {
 
     public void disableNotificationMessages() {
         String token = app().userModel().getCsrfToken();
-        String data = "NotificationMessagesForm%5BPromo+messages%5D%5Bmessages%5D=false";
+        String data = "NotificationMessagesForm[Promo messages][messages]=false&";
         String body = data + "&CSRF_TOKEN=" + token;
 
         Response response = app().rest().request()
@@ -188,7 +198,26 @@ public class RegistrationTest {
 
     public void disableUserSubscription() {
         String token = app().userModel().getCsrfToken();
-        String data = "UserSubscriptionForm%5BeEmail%5D%5BMatches%5D=0&UserSubscriptionForm%5BeEmail%5D%5BOn+site+activity%5D=0&UserSubscriptionForm%5BeEmail%5D%5BSite+offers%5D=0&UserSubscriptionForm%5BeEmail%5D%5BService+alerts%5D=0&UserSubscriptionForm%5BwebPush%5D%5BMatches%5D=0&UserSubscriptionForm%5BwebPush%5D%5BOn+site+activity%5D=0&UserSubscriptionForm%5BwebPush%5D%5BSite+offers%5D=0&UserSubscriptionForm%5BwebPush%5D%5BService+alerts%5D=0&UserSubscriptionForm%5BpushIos%5D%5BMatches%5D=0&UserSubscriptionForm%5BpushIos%5D%5BOn+site+activity%5D=0&UserSubscriptionForm%5BpushIos%5D%5BSite+offers%5D=0&UserSubscriptionForm%5BpushIos%5D%5BService+alerts%5D=0&UserSubscriptionForm%5BpushAndroid%5D%5BMatches%5D=0&UserSubscriptionForm%5BpushAndroid%5D%5BOn+site+activity%5D=0&UserSubscriptionForm%5BpushAndroid%5D%5BSite+offers%5D=0&UserSubscriptionForm%5BpushAndroid%5D%5BService+alerts%5D=0&UserSubscriptionForm%5Bsms%5D%5BMatches%5D=0&UserSubscriptionForm%5Bsms%5D%5BOn+site+activity%5D=0&UserSubscriptionForm%5Bsms%5D%5BSite+offers%5D=0&UserSubscriptionForm%5Bsms%5D%5BService+alerts%5D=0";
+        String data = "UserSubscriptionForm[eEmail][Matches]=0&" +
+                "UserSubscriptionForm[eEmail][On site activity]=0&" +
+                "UserSubscriptionForm[eEmail][Site offers]=0&" +
+                "UserSubscriptionForm[eEmail][Service alerts]=0&" +
+                "UserSubscriptionForm[webPush][Matches]=0&" +
+                "UserSubscriptionForm[webPush][On site activity]=0&" +
+                "UserSubscriptionForm[webPush][Site offers]=0&" +
+                "UserSubscriptionForm[webPush][Service alerts]=0&" +
+                "UserSubscriptionForm[pushIos][Matches]=0&" +
+                "UserSubscriptionForm[pushIos][On site activity]=0&" +
+                "UserSubscriptionForm[pushIos][Site offers]=0&" +
+                "UserSubscriptionForm[pushIos][Service alerts]=0&" +
+                "UserSubscriptionForm[pushAndroid][Matches]=0&" +
+                "UserSubscriptionForm[pushAndroid][On site activity]=0&" +
+                "UserSubscriptionForm[pushAndroid][Site offers]=0&" +
+                "UserSubscriptionForm[pushAndroid][Service alerts]=0&" +
+                "UserSubscriptionForm[sms][Matches]=0&" +
+                "UserSubscriptionForm[sms][On site activity]=0&" +
+                "UserSubscriptionForm[sms][Site offers]=0&" +
+                "UserSubscriptionForm[sms][Service alerts]=0&";
         String body = data + "&CSRF_TOKEN=" + token;
 
         Response response = app().rest().request()
