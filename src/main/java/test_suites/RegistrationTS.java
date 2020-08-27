@@ -17,23 +17,26 @@ public class RegistrationTS extends TestSuiteBase {
         reg.registration(userModel);
     }
 
-    @Test(dependsOnMethods = {"registration"},priority = 2)
+    @Test(dependsOnMethods = {"registration"}, priority = 2)
     public void confirm() {
         reg.confirmation();
     }
 
-    @Test(dependsOnMethods = {"confirm"},priority = 3)
-    public void funnel()
-    {
+    @Test(dependsOnMethods = {"confirm"}, priority = 3)
+    public void funnel() {
         reg.funnel();
     }
 
-    @Test(dependsOnMethods = {"funnel"})
-    public void disableNotification()
-    {
+    @Test(dependsOnMethods = {"funnel"},priority = 4)
+    public void disableNotification() {
         reg.disableNotificationSettings();
         reg.disableNotificationMessages();
         reg.disableUserSubscription();
+    }
+
+    @Test(dependsOnMethods = {"disableNotification"},priority = 5)
+    public void pay1day() {
+        reg.paid1day();
     }
 
     @AfterTest

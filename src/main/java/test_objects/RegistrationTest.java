@@ -1,6 +1,8 @@
 package test_objects;
 
+import backend.page_objects.BackendSearchPage;
 import backend.page_objects.BackendSiteIpCookiePage;
+import core.config.Config;
 import core.data_models.UserModel;
 import core.helpers.UrlHelper;
 import io.restassured.http.Cookie;
@@ -11,7 +13,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.testng.TestException;
 import org.testng.util.Strings;
-
 import static core.ApplicationManager.app;
 
 public class RegistrationTest {
@@ -19,7 +20,7 @@ public class RegistrationTest {
     public Cookie getCookie() {
         BackendSiteIpCookiePage ipCookiePage = new BackendSiteIpCookiePage();
         String ipCookieName = ipCookiePage.getIpCookieName();
-        String country = "can";
+        String country = "gbr";
         String location = app().proxy().getIp(country);
         return new Cookie.Builder(ipCookieName, location).build();
     }
@@ -61,6 +62,7 @@ public class RegistrationTest {
         }
         app().userModel().setAutologinKey(refreshToken);
     }
+
 
     public void funnel() {
         String token = app().userModel().getCsrfToken();
@@ -167,29 +169,42 @@ public class RegistrationTest {
                 "NotificationSettingsForm[Ask for detailsAdded][site]=false&";
         String body = data + "&CSRF_TOKEN=" + token;
 
-        app().rest().request()
-                .header("X-Requested-With", "XMLHttpRequest")
-                .cookie(getCookie())
-                .body(body)
-                .when()
-                .post("https://www.flirt.com/api/v1/account/notificationSettings")
-                .then()
-                .statusCode(200);
+        String endPoint = "https://www.flirt.com/api/v1/account/notificationSettings";
+
+        try {
+            app().rest().request()
+                    .header("X-Requested-With", "XMLHttpRequest")
+                    .cookie(getCookie())
+                    .body(body)
+                    .when()
+                    .post(endPoint)
+                    .then()
+                    .statusCode(200);
+        } catch (AssertionError ex) {
+            throw new TestException("Impossible update Notification Settings: " + endPoint + ":" + ex);
+        }
+
     }
 
     public void disableNotificationMessages() {
         String token = app().userModel().getCsrfToken();
         String data = "NotificationMessagesForm[Promo messages][messages]=false&";
         String body = data + "&CSRF_TOKEN=" + token;
+        String endPoint = "https://www.flirt.com/api/v1/account/notificationMessages";
 
-        app().rest().request()
-                .header("X-Requested-With", "XMLHttpRequest")
-                .cookie(getCookie())
-                .body(body)
-                .when()
-                .post("https://www.flirt.com/api/v1/account/notificationMessages")
-                .then()
-                .statusCode(200);
+        try {
+            app().rest().request()
+                    .header("X-Requested-With", "XMLHttpRequest")
+                    .cookie(getCookie())
+                    .body(body)
+                    .when()
+                    .post(endPoint)
+                    .then()
+                    .statusCode(200);
+        } catch (AssertionError ex) {
+            throw new TestException("Impossible update Notification Settings: " + endPoint + ":" + ex);
+        }
+
     }
 
     public void disableUserSubscription() {
@@ -215,15 +230,72 @@ public class RegistrationTest {
                 "UserSubscriptionForm[sms][Site offers]=0&" +
                 "UserSubscriptionForm[sms][Service alerts]=0&";
         String body = data + "&CSRF_TOKEN=" + token;
+        String endPoint = "https://www.flirt.com/api/v1/userSubscription";
 
-        app().rest().request()
-                .header("X-Requested-With", "XMLHttpRequest")
-                .cookie(getCookie())
-                .body(body)
-                .when()
-                .post("https://www.flirt.com/api/v1/userSubscription")
-                .then()
-                .statusCode(200);
+        try {
+            app().rest().request()
+                    .header("X-Requested-With", "XMLHttpRequest")
+                    .cookie(getCookie())
+                    .body(body)
+                    .when()
+                    .post(endPoint)
+                    .then()
+                    .statusCode(200);
+        } catch (AssertionError ex) {
+            throw new TestException("Impossible update Notification Settings: " + endPoint + ":" + ex);
+        }
+
     }
 
+    public void paid1day() {
+
+        BackendSearchPage userInfo = new BackendSearchPage();
+        String id = userInfo.getUserInfo("dmitriykulinich1598537009880@maildrop.ropot.net", "Id");
+
+        String token = app().userModel().getCsrfToken();
+
+        String data = "CreditCardPaymentForm[method]=card&" +
+                "CreditCardPaymentForm[scenario]=initial&" +
+                "CreditCardPaymentForm[via]=membership&" +
+                "CreditCardPaymentForm[card_number]=" + Config.project().getProperty("phoenix.card.number") + "&" +
+                "CreditCardPaymentForm[package_id]= bd99ff7b9b1913a39722f6c46326e5c1&" +
+                "CreditCardPaymentForm[product_id]=1&" +
+                "CreditCardPaymentForm[currency_code]=GBP&" +
+                "CreditCardPaymentForm[user_id]=" + id + "&" +
+                "CreditCardPaymentForm[domain]=Flirt&" +
+                "CreditCardPaymentForm[uniqueVisitId]=ffad3a6c4f2418ce2ac443e6e01ff0de&" +
+                "CreditCardPaymentForm[locale]=en&" +
+                "CreditCardPaymentForm[country_code]=GBR&" +
+                "CreditCardPaymentForm[isAdditionalPackageRepeated]=0&" +
+                "CreditCardPaymentForm[hidePaymentForm]=0&" +
+                "CreditCardPaymentForm[prevVia]=toolbar_upgrade_button&" +
+                "CreditCardPaymentForm[expiration_date_m]=" + Config.project().getProperty("phoenix.card.date.month") + "&" +
+                "CreditCardPaymentForm[expiration_date_y]=" + Config.project().getProperty("phoenix.card.date.year") + "&" +
+                "CreditCardPaymentForm[security_number]=" + Config.project().getProperty("phoenix.card.csv") + "&" +
+                "CreditCardPaymentForm[card_holder]=" + Config.project().getProperty("phoenix.card.card_holder") + "&" +
+                "CreditCardPaymentForm[browserDetails][colorDepth]=24&" +
+                "CreditCardPaymentForm[browserDetails][userAgent]= Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36&" +
+                "CreditCardPaymentForm[browserDetails][javaScriptEnabled]=true&" +
+                "CreditCardPaymentForm[browserDetails][javaEnabled]=false&" +
+                "CreditCardPaymentForm[browserDetails][screenHeight]=937&" +
+                "CreditCardPaymentForm[browserDetails][screenWidth]=1060&" +
+                "CreditCardPaymentForm[browserDetails][tz]=-180&" +
+                "CreditCardPaymentForm[browserDetails][language]= en-US&";
+
+        String body = data + "CSRF_TOKEN=" + token;
+        String endPoint = "https://www.flirt.com/api/v1/pay/pay/isJsonMode/true?via=membership";
+
+        try {
+            app().rest().request()
+                    .header("X-Requested-With", "XMLHttpRequest")
+                    .cookie(getCookie())
+                    .body(body)
+                    .when()
+                    .post(endPoint)
+                    .then()
+                    .statusCode(200);
+        } catch (AssertionError ex) {
+            throw new TestException("Impossible update membership : " + endPoint + ":" + ex);
+        }
+    }
 }
